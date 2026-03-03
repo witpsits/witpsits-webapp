@@ -50,7 +50,7 @@ const Navbar = () => {
               News
             </Link>
             <Link
-              to="#"
+              to="/org-chart"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >
               Org Chart
