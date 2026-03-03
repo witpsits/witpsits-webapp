@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,7 +10,7 @@ const Navbar = () => {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-[#5671FF]/10 text-[#5671FF] ring-1 ring-[#5671FF]/30">
               <img
                 src="/assets/PSITS_logo.png"
@@ -26,40 +27,46 @@ const Navbar = () => {
                 Information Technology Students
               </span>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            <a
-              href="#"
+            <Link
+              to="/"
+              className="text-sm font-medium transition-colors hover:text-[#5671FF]"
+            >
+              Home
+            </Link>
+            <Link
+              to="/prospectus"
+              className="text-sm font-medium transition-colors hover:text-[#5671FF]"
+            >
+              Prospectus
+            </Link>
+            <Link
+              to="#"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >
               News
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="#"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >
               Org Chart
-            </a>
-            <a
-              href="#"
-              className="text-sm font-medium transition-colors hover:text-[#5671FF]"
-            >
-              Resources
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/showcase"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >
               Showcase
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/faq"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >
-              FAQs
-            </a>
+              FAQ
+            </Link>
           </nav>
 
           {/* Actions */}
@@ -68,7 +75,7 @@ const Navbar = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5671FF]/60 w-4 h-4" />
               <input
                 type="text"
-                placeholder="System Search..."
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="h-10 w-48 lg:w-64 rounded-lg border-none bg-[#1a2238] pl-10 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#5671FF]/50"
