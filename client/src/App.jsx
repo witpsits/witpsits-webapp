@@ -6,6 +6,7 @@ import AdminDashboard from "./pages/adminDashboard";
 import ManageNews from "./components/admin/manageNews";
 import AcademicResources from "./components/admin/academicResources";
 import UserLogs from "./components/admin/userLogs";
+import OrgChart from "./pages/orgchart";
 
 function App() {
   return (
@@ -15,12 +16,6 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/prospectus" element={<Prospectus />} />
         <Route path="/showcase" element={<Showcase />} />
-        
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/news" element={<ManageNews />} />
-        <Route path="/admin/resources" element={<AcademicResources />} />
-        <Route path="/admin/logs" element={<UserLogs />} />
       </Routes>
     </Router>
   );
