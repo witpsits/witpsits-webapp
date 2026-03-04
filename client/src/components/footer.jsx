@@ -52,7 +52,7 @@ const Footer = () => {
               <a href="#" className="hover:text-[#5671FF]">
                 Resources
               </a>
-              <a href="#" className="hover:text-[#5671FF]">
+              <a href="/showcase" className="hover:text-[#5671FF]">
                 Showcase
               </a>
             </nav>
