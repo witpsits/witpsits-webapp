@@ -1,27 +1,36 @@
-import React from 'react';
-import { ArrowRight, ChevronRight, Code, Shield, BookOpen, Network, Rocket } from 'lucide-react';
-import Navbar from '../components/navbar.jsx';
-import Footer from '../components/footer.jsx';
+import React from "react";
+import {
+  ArrowRight,
+  ChevronRight,
+  Code,
+  Shield,
+  BookOpen,
+  Network,
+  Rocket,
+} from "lucide-react";
+import Navbar from "../components/navbar.jsx";
+import Footer from "../components/footer.jsx";
 
 const Homepage = () => {
   return (
-    <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100">
+    <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100 overflow-x-hidden">
       {/* Navigation */}
       <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-8">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-10 lg:pb-12">
         {/* Hero Section */}
         <section className="relative mb-16 overflow-hidden rounded-xl border border-[#5671FF]/20 bg-[#1a2238]">
           {/* Pattern Background */}
-          <div 
-            className="absolute inset-0 opacity-20" 
+          <div
+            className="absolute inset-0 opacity-20"
             style={{
-              backgroundImage: 'linear-gradient(45deg, #5671FF 25%, transparent 25%, transparent 50%, #5671FF 50%, #5671FF 75%, transparent 75%, transparent)',
-              backgroundSize: '4px 4px'
+              backgroundImage:
+                "linear-gradient(45deg, #5671FF 25%, transparent 25%, transparent 50%, #5671FF 50%, #5671FF 75%, transparent 75%, transparent)",
+              backgroundSize: "4px 4px",
             }}
           />
-          
+
           <div className="relative grid items-center gap-8 p-8 md:grid-cols-2 md:p-16">
             <div className="flex flex-col gap-6">
               {/* Badge */}
@@ -41,7 +50,9 @@ const Homepage = () => {
 
               {/* Description */}
               <p className="max-w-md text-base leading-relaxed text-slate-400">
-                Join the National IT Conference 2024. Experience the digital glitch revolution and connect with industry pioneers. Registration is now open for all WIT students.
+                Join the National IT Conference 2024. Experience the digital
+                glitch revolution and connect with industry pioneers.
+                Registration is now open for all WIT students.
               </p>
 
               {/* Buttons */}
@@ -66,8 +77,12 @@ const Homepage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E1528]/80 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 flex flex-col">
-                  <span className="text-xs font-bold text-[#5671FF]">NITCON 2024</span>
-                  <span className="text-lg font-bold text-white">Digital Frontiers</span>
+                  <span className="text-xs font-bold text-[#5671FF]">
+                    NITCON 2024
+                  </span>
+                  <span className="text-lg font-bold text-white">
+                    Digital Frontiers
+                  </span>
                 </div>
               </div>
 
@@ -87,7 +102,10 @@ const Homepage = () => {
               </h2>
               <div className="h-1 w-20 bg-[#5671FF]"></div>
             </div>
-            <a href="#" className="group flex items-center gap-1 text-sm font-bold text-[#5671FF] transition-all">
+            <a
+              href="#"
+              className="group flex items-center gap-1 text-sm font-bold text-[#5671FF] transition-all"
+            >
               Browse Archive
               <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
@@ -109,12 +127,15 @@ const Homepage = () => {
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">October 25, 2024</span>
+                <span className="mb-2 text-xs font-medium text-slate-500">
+                  October 25, 2024
+                </span>
                 <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
                   Tech Summit 2024
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Join us for a day of innovation featuring guest speakers from leading tech companies in Asia.
+                  Join us for a day of innovation featuring guest speakers from
+                  leading tech companies in Asia.
                 </p>
                 <div className="mt-auto flex items-center justify-between">
                   <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
@@ -139,12 +160,15 @@ const Homepage = () => {
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">November 10, 2024</span>
+                <span className="mb-2 text-xs font-medium text-slate-500">
+                  November 10, 2024
+                </span>
                 <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
                   Coding Bootcamp
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Master the art of full-stack development. Intense 48-hour challenge for WIT student developers.
+                  Master the art of full-stack development. Intense 48-hour
+                  challenge for WIT student developers.
                 </p>
                 <div className="mt-auto flex items-center justify-between">
                   <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
@@ -169,12 +193,15 @@ const Homepage = () => {
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">December 05, 2024</span>
+                <span className="mb-2 text-xs font-medium text-slate-500">
+                  December 05, 2024
+                </span>
                 <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
                   Cybersecurity Workshop
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Protect the digital frontier. Hands-on training on network security and ethical hacking.
+                  Protect the digital frontier. Hands-on training on network
+                  security and ethical hacking.
                 </p>
                 <div className="mt-auto flex items-center justify-between">
                   <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
@@ -194,7 +221,8 @@ const Homepage = () => {
               Core <span className="text-[#5671FF]">Pillars</span>
             </h2>
             <p className="mx-auto max-w-2xl text-slate-400">
-              Our mission is to foster a community of tech excellence through three strategic focus areas designed for student growth.
+              Our mission is to foster a community of tech excellence through
+              three strategic focus areas designed for student growth.
             </p>
           </div>
 
@@ -205,12 +233,18 @@ const Homepage = () => {
                 <BookOpen className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">Academic Excellence</h3>
+                <h3 className="mb-2 text-xl font-bold text-slate-100">
+                  Academic Excellence
+                </h3>
                 <p className="text-sm leading-relaxed text-slate-400">
-                  Curated modules, study groups, and resource sharing to help you excel in your IT curriculum.
+                  Curated modules, study groups, and resource sharing to help
+                  you excel in your IT curriculum.
                 </p>
               </div>
-              <a href="#" className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]">
+              <a
+                href="#"
+                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+              >
                 Access Vault
                 <ArrowRight className="w-4 h-4" />
               </a>
@@ -222,12 +256,18 @@ const Homepage = () => {
                 <Network className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">Leadership Network</h3>
+                <h3 className="mb-2 text-xl font-bold text-slate-100">
+                  Leadership Network
+                </h3>
                 <p className="text-sm leading-relaxed text-slate-400">
-                  Connect with the student council and alumni mentors who are shaping the chapter's future.
+                  Connect with the student council and alumni mentors who are
+                  shaping the chapter's future.
                 </p>
               </div>
-              <a href="#" className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]">
+              <a
+                href="#"
+                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+              >
                 View Chart
                 <ArrowRight className="w-4 h-4" />
               </a>
@@ -239,12 +279,18 @@ const Homepage = () => {
                 <Rocket className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">Innovation Lab</h3>
+                <h3 className="mb-2 text-xl font-bold text-slate-100">
+                  Innovation Lab
+                </h3>
                 <p className="text-sm leading-relaxed text-slate-400">
-                  Showcasing top-tier student projects, capstones, and open-source contributions.
+                  Showcasing top-tier student projects, capstones, and
+                  open-source contributions.
                 </p>
               </div>
-              <a href="#" className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]">
+              <a
+                href="#"
+                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+              >
                 View Showcase
                 <ArrowRight className="w-4 h-4" />
               </a>
@@ -260,7 +306,8 @@ const Homepage = () => {
                 Ready to join the revolution?
               </h2>
               <p className="text-white/80">
-                Become a member of the PSITS WIT Chapter today and unlock exclusive access to workshops, resources, and networking events.
+                Become a member of the PSITS WIT Chapter today and unlock
+                exclusive access to workshops, resources, and networking events.
               </p>
             </div>
             <div className="flex flex-shrink-0 gap-4">

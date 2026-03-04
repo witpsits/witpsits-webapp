@@ -7,8 +7,11 @@ const Footer = () => {
       <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between gap-10">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Zap size={24} className="text-[#5671FF]" fill="#5671FF" />
-
+              <img
+                src="/assets/PSITS_logo.png"
+                alt="PSITS Logo"
+                className="w-12 h-12 object-contain"
+              />
             <span className="text-lg font-bold text-slate-100">PSITS WIT</span>
           </div>
           <p className="max-w-xs text-sm text-slate-500 leading-relaxed">
@@ -52,7 +55,7 @@ const Footer = () => {
               <a href="#" className="hover:text-[#5671FF]">
                 Resources
               </a>
-              <a href="#" className="hover:text-[#5671FF]">
+              <a href="/showcase" className="hover:text-[#5671FF]">
                 Showcase
               </a>
             </nav>
