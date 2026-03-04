@@ -13,7 +13,7 @@ import OrgChart from "./pages/orgchart";
 function App() {
   return (
     <ClickSpark
-      sparkColor="#5671FF"
+      sparkColor="#f1f1f1f1"
       sparkCount={10}
       sparkSize={12}
       sparkRadius={20}
