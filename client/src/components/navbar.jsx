@@ -44,12 +44,6 @@ const Navbar = () => {
               Prospectus
             </Link>
             <Link
-              to="#"
-              className="text-sm font-medium transition-colors hover:text-[#5671FF]"
-            >
-              News
-            </Link>
-            <Link
               to="/org-chart"
               className="text-sm font-medium transition-colors hover:text-[#5671FF]"
             >

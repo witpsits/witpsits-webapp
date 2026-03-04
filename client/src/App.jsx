@@ -15,7 +15,14 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="/prospectus" element={<Prospectus />} />
+        <Route path="/org-chart" element={<OrgChart />} />
         <Route path="/showcase" element={<Showcase />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/news" element={<ManageNews />} />
+        <Route path="/admin/resources" element={<AcademicResources />} />
+        <Route path="/admin/logs" element={<UserLogs />} />
       </Routes>
     </Router>
   );
