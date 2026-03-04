@@ -133,7 +133,7 @@ const AdminDashboard = () => {
                 PSITS-WIT
               </h1>
               <p className="text-[#5671FF]/60 text-xs font-medium">
-                Super Admin
+                Admin Dashboard
               </p>
             </div>
           </div>
@@ -215,7 +215,9 @@ const AdminDashboard = () => {
             <button className="p-2 bg-white/5 rounded-lg text-slate-500 hover:text-[#5671FF] transition-colors">
               <Settings className="w-5 h-5" />
             </button>
-            <button className="bg-[#FF602D] hover:bg-[#FF602D]/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-[#FF602D]/30 flex items-center gap-2 transition-all active:scale-95">
+            <button
+            onClick={() => navigate('/admin/create-announcement')}
+            className="bg-[#FF602D] hover:bg-[#FF602D]/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-[#FF602D]/30 flex items-center gap-2 transition-all active:scale-95">
               <Plus className="w-4 h-4" />
               Add New Post
             </button>

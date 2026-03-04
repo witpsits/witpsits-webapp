@@ -6,6 +6,7 @@ import AdminDashboard from "./pages/adminDashboard";
 import ManageNews from "./components/admin/manageNews";
 import AcademicResources from "./components/admin/academicResources";
 import UserLogs from "./components/admin/userLogs";
+import CreateContent from './components/admin/contentForm';
 import OrgChart from "./pages/orgchart";
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
         <Route path="/admin/news" element={<ManageNews />} />
         <Route path="/admin/resources" element={<AcademicResources />} />
         <Route path="/admin/logs" element={<UserLogs />} />
+
+        {/* Create Content Routes */}
+        <Route path="/admin/create-announcement" element={<CreateContent />} />
+        <Route path="/admin/create-news" element={<CreateContent />} />
+        <Route path="/admin/create-resource" element={<CreateContent />} />
       </Routes>
     </Router>
   );
