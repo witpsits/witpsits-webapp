@@ -33,7 +33,7 @@ const FaqPage = () => {
     <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-[800px] mx-auto w-full px-6 py-16 flex flex-col">
+      <main className="flex-1 max-w-[800px] mx-auto w-full px-6 pt-24 md:pt-32 pb-16 flex flex-col">
         
         {/* Header Section */}
         <div className="mb-12">
