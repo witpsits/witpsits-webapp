@@ -6,10 +6,12 @@ import ProspectusStats from "../components/prospectus/ProspectusStats";
 import ProspectusTable from "../components/prospectus/ProspectusTable";
 import ProspectusAdvising from "../components/prospectus/ProspectusAdvising";
 import Footer from "../components/footer";
+import PrivacyModal from "../components/PrivacyModal";
 
 const ProspectusPage = () => {
   return (
     <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100">
+      <PrivacyModal />
       <Navbar />
 
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-36 pb-8">

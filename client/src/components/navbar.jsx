@@ -62,19 +62,17 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm font-medium transition-all hover:text-[#5671FF] relative group ${
-                  location.pathname === link.path
-                    ? "text-[#5671FF]"
-                    : "text-slate-300"
-                }`}
+                className={`text-sm font-medium transition-all hover:text-[#5671FF] relative group ${location.pathname === link.path
+                  ? "text-[#5671FF]"
+                  : "text-slate-300"
+                  }`}
               >
                 {link.name}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-[#5671FF] transition-all duration-300 ${
-                    location.pathname === link.path
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
-                  }`}
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-[#5671FF] transition-all duration-300 ${location.pathname === link.path
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                    }`}
                 ></span>
               </Link>
             ))}
@@ -95,9 +93,12 @@ const Navbar = () => {
             </div>
 
             {/* Login Button - Hidden on mobile, visible on tablet+ */}
-            <button className="hidden md:flex h-10 items-center justify-center rounded-lg bg-[#FF602D] px-4 lg:px-6 text-sm font-bold text-white transition-all hover:bg-[#FF602D]/90 hover:shadow-[0_0_20px_rgba(255,96,45,0.4)] active:scale-95 whitespace-nowrap">
+            <Link
+              to="/login"
+              className="hidden md:flex h-10 items-center justify-center rounded-lg bg-[#FF602D] px-4 lg:px-6 text-sm font-bold text-white transition-all hover:bg-[#FF602D]/90 hover:shadow-[0_0_20px_rgba(255,96,45,0.4)] active:scale-95 whitespace-nowrap"
+            >
               Login
-            </button>
+            </Link>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -117,19 +118,17 @@ const Navbar = () => {
 
       {/* Mobile Sidebar Overlay */}
       <div
-        className={`fixed inset-0 bg-[#0E1528]/40 backdrop-blur-md transition-all duration-300 lg:hidden ${
-          isMenuOpen
-            ? "opacity-100 z-[110]"
-            : "opacity-0 pointer-events-none invisible"
-        }`}
+        className={`fixed inset-0 bg-[#0E1528]/40 backdrop-blur-md transition-all duration-300 lg:hidden ${isMenuOpen
+          ? "opacity-100 z-[110]"
+          : "opacity-0 pointer-events-none invisible"
+          }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
       {/* Mobile Sidebar */}
       <aside
-        className={`fixed top-0 right-0 h-full w-[90%] xs:w-[85%] max-w-[320px] bg-[#1a2238]/90 backdrop-blur-xl border-l border-[#5671FF]/20 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] lg:hidden ${
-          isMenuOpen ? "translate-x-0 z-[120]" : "translate-x-full invisible"
-        }`}
+        className={`fixed top-0 right-0 h-full w-[90%] xs:w-[85%] max-w-[320px] bg-[#1a2238]/90 backdrop-blur-xl border-l border-[#5671FF]/20 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] lg:hidden ${isMenuOpen ? "translate-x-0 z-[120]" : "translate-x-full invisible"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
@@ -175,11 +174,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center py-2.5 sm:py-3 px-4 sm:px-5 rounded-xl transition-all text-sm sm:text-base ${
-                    location.pathname === link.path
-                      ? "bg-[#5671FF] text-white shadow-[0_0_20px_rgba(86,113,255,0.3)] font-bold"
-                      : "text-slate-300 hover:bg-[#5671FF]/10 hover:text-white"
-                  }`}
+                  className={`flex items-center py-2.5 sm:py-3 px-4 sm:px-5 rounded-xl transition-all text-sm sm:text-base ${location.pathname === link.path
+                    ? "bg-[#5671FF] text-white shadow-[0_0_20px_rgba(86,113,255,0.3)] font-bold"
+                    : "text-slate-300 hover:bg-[#5671FF]/10 hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -189,9 +187,13 @@ const Navbar = () => {
 
           {/* Sidebar Footer */}
           <div className="p-4 sm:p-5 border-t border-[#5671FF]/10 bg-[#0E1528]/30">
-            <button className="flex h-11 sm:h-12 w-full items-center justify-center rounded-xl bg-[#FF602D] text-sm font-bold text-white shadow-lg transition-all hover:bg-[#FF602D]/90 active:scale-95">
+            <Link
+              to="/login"
+              className="flex h-11 sm:h-12 w-full items-center justify-center rounded-xl bg-[#FF602D] text-sm font-bold text-white shadow-lg transition-all hover:bg-[#FF602D]/90 active:scale-95"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Log-in
-            </button>
+            </Link>
             <p className="mt-2.5 sm:mt-3 text-center text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-[0.15em] sm:tracking-[0.2em]">
               PSITS WIT Chapter &copy; 2024
             </p>
