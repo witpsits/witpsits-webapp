@@ -1,11 +1,13 @@
 import React from 'react';
+import curriculumPdf from '../../data/Revised-Curriculum-Effective-2023-2024-Descriptive-Title-1.pdf';
 
 const documents = [
     {
-        name: 'BS Information Technology 2024',
+        name: 'Revised Curriculum 2023-2024',
         category: 'Major Program',
         catBg: 'bg-[#5671FF]/10 text-[#5671FF] border border-[#5671FF]/20',
-        format: 'PDF (2.4 MB)',
+        format: 'PDF',
+        url: curriculumPdf,
     },
 ];
 
@@ -57,21 +59,28 @@ const ProspectusTable = () => {
                                     {doc.format}
                                 </td>
                                 <td className="px-6 py-5">
-                                    <div className="flex justify-end gap-3">
-                                        <button
-                                            className="p-2 text-slate-400 hover:text-[#5671FF] transition-colors"
+                                    <div className="flex justify-end gap-3 items-center">
+                                        <a
+                                            className="p-2 text-slate-400 hover:text-[#5671FF] transition-colors flex items-center"
                                             title="View"
+                                            href={doc.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                         >
                                             <span className="material-symbols-outlined">
                                                 visibility
                                             </span>
-                                        </button>
-                                        <button className="flex items-center gap-2 px-4 py-2 bg-[#5671FF] text-white text-xs font-bold rounded-lg hover:bg-[#5671FF]/90 transition-all shadow-md shadow-[#5671FF]/10">
+                                        </a>
+                                        <a
+                                            className="flex items-center gap-2 px-4 py-2 bg-[#5671FF] text-white text-xs font-bold rounded-lg hover:bg-[#5671FF]/90 transition-all shadow-md shadow-[#5671FF]/10"
+                                            href={doc.url}
+                                            download={`${doc.name}.pdf`}
+                                        >
                                             <span className="material-symbols-outlined text-sm">
                                                 download
                                             </span>
                                             Download
-                                        </button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
