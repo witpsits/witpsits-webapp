@@ -1,7 +1,33 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+
+        const { data, error: authError } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+
+        if (authError) {
+            setError(authError.message);
+            setLoading(false);
+        } else {
+            setLoading(false);
+            navigate('/admin'); // Redirect to admin dashboard
+        }
+    };
 
     return (
         <div className="w-full max-w-md">
@@ -26,7 +52,12 @@ const LoginForm = () => {
                         </div>
                     </div>
                     <div className="p-8">
-                        <form className="space-y-6">
+                        <form className="space-y-6" onSubmit={handleLogin}>
+                            {error && (
+                                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-semibold">
+                                    {error}
+                                </div>
+                            )}
                             {/* Email Field */}
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-300 ml-1">
@@ -40,6 +71,9 @@ const LoginForm = () => {
                                         className="w-full bg-[#0E1528] border border-[#5671FF]/20 focus:border-[#5671FF] focus:ring-1 focus:ring-[#5671FF] rounded-lg py-3.5 pl-12 pr-4 text-slate-100 placeholder:text-slate-500 transition-all outline-none hover:border-[#5671FF]/40"
                                         placeholder="student.name@wit.edu.ph"
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -64,6 +98,9 @@ const LoginForm = () => {
                                         className="w-full bg-[#0E1528] border border-[#5671FF]/20 focus:border-[#5671FF] focus:ring-1 focus:ring-[#5671FF] rounded-lg py-3.5 pl-12 pr-12 text-slate-100 placeholder:text-slate-500 transition-all outline-none hover:border-[#5671FF]/40"
                                         placeholder="••••••••••••"
                                         type={showPassword ? "text" : "password"}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
                                     />
                                     <button
                                         className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5671FF]/50 hover:text-[#5671FF] transition-colors"
@@ -91,9 +128,13 @@ const LoginForm = () => {
                                 </label>
                             </div>
                             {/* Login Button */}
-                            <button className="w-full bg-[#FF602D] hover:bg-[#FF602D]/90 text-white font-bold py-4 rounded-lg shadow-[0_0_15px_rgba(255,96,45,0.3)] hover:shadow-[0_0_25px_rgba(255,96,45,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <button 
+                                type="submit" 
+                                disabled={loading}
+                                className="w-full bg-[#FF602D] hover:bg-[#FF602D]/90 disabled:bg-[#FF602D]/50 text-white font-bold py-4 rounded-lg shadow-[0_0_15px_rgba(255,96,45,0.3)] hover:shadow-[0_0_25px_rgba(255,96,45,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2"
+                            >
                                 <span className="material-symbols-outlined text-lg">login</span>
-                                SIGN IN TO PORTAL
+                                {loading ? "SIGNING IN..." : "SIGN IN TO PORTAL"}
                             </button>
                         </form>
                         <div className="mt-8 pt-6 border-t border-[#5671FF]/10 flex flex-col items-center gap-4">

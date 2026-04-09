@@ -1,48 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
 import { GraduationCap, Code2, PartyPopper } from "lucide-react";
 import OrgNode from "../components/orgchart/OrgNode.jsx";
 import CommitteeCard from "../components/orgchart/CommitteeCard.jsx";
-
-// ─── Image Imports ─────────────────────────────────────────────────────────────
-import imgPagatpat from "../assets/faculties/pagatpat.jpg";
-import imgBernardino from "../assets/faculties/bernardino.jpg";
-import imgRachel from "../assets/faculties/rachel.jpg";
-import imgAl from "../assets/faculties/al.jpg";
-import imgDerla from "../assets/faculties/derla.jpg";
-import imgEspina from "../assets/faculties/espina.jpg";
-import imgFirmalino from "../assets/faculties/firmalino.jpg";
-import imgJomel from "../assets/faculties/jomel.jpg";
-import imgKempee from "../assets/faculties/kempee.jpg";
-import imgLilian from "../assets/faculties/lilian.jpg";
-import imgMogib from "../assets/faculties/mogib.jpg";
-import imgNarte from "../assets/faculties/narte.jpg";
-import imgPador from "../assets/faculties/pador.jpg";
-import imgRasheed from "../assets/faculties/rasheed.jpg";
-import imgSayco from "../assets/faculties/sayco.jpg";
-import imgTadifa from "../assets/faculties/tadifa.jpg";
-// ──────────────────────────────────────────────────────────────────────────────
+import { supabase } from "../lib/supabaseClient";
 
 const LINE = "bg-[#5671FF]/30";
 
-const facultyMembers = [
-  { name: "Al", imgSrc: imgAl },
-  { name: "Derla", imgSrc: imgDerla },
-  { name: "Espina", imgSrc: imgEspina },
-  { name: "Firmalino", imgSrc: imgFirmalino },
-  { name: "Jomel", imgSrc: imgJomel },
-  { name: "Kempee", imgSrc: imgKempee },
-  { name: "Lilian", imgSrc: imgLilian },
-  { name: "Mogib", imgSrc: imgMogib },
-  { name: "Narte", imgSrc: imgNarte },
-  { name: "Pador", imgSrc: imgPador },
-  { name: "Rasheed", imgSrc: imgRasheed },
-  { name: "Sayco", imgSrc: imgSayco },
-  { name: "Tadifa", imgSrc: imgTadifa },
-];
-
 const OrgChart = () => {
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOrgChart = async () => {
+      try {
+        const { data, error } = await supabase.from('org_chart').select('*');
+        if (error) throw error;
+        setMembers(data || []);
+      } catch (error) {
+        console.error("Error fetching org chart:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrgChart();
+  }, []);
+
+  // Compute Hierarchy 
+  const programHead = members.find(m => m.role?.toLowerCase().includes('head'));
+  const custodian = members.find(m => m.role?.toLowerCase().includes('custodian'));
+  const clerk = members.find(m => m.role?.toLowerCase().includes('clerk'));
+  
+  // Faculty is everyone else
+  const facultyMembers = members.filter(m => 
+    !m.role?.toLowerCase().includes('head') && 
+    !m.role?.toLowerCase().includes('custodian') && 
+    !m.role?.toLowerCase().includes('clerk')
+  );
+
   return (
     <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100 flex flex-col relative overflow-hidden">
 
@@ -83,74 +79,88 @@ const OrgChart = () => {
           {/* Outer dashed border container */}
           <div className="border border-dashed border-[#5671FF]/20 rounded-3xl p-8 md:p-12">
 
-            {/* ── Level 1: Program Head ──────────────────── */}
-            <div className="flex flex-col items-center">
-              <OrgNode
-                name="Pagatpat"
-                role="Program Head"
-                imgSrc={imgPagatpat}
-                size="lg"
-              />
-
-              {/* Line down from L1 */}
-              <div className={`w-px h-10 ${LINE}`}></div>
-
-              {/* ── Horizontal bar for L2 ─────────────── */}
-              <div className="relative w-full max-w-lg flex items-start justify-center">
-                {/* Horizontal bar */}
-                <div className={`absolute top-0 left-1/4 right-1/4 h-px ${LINE}`}></div>
-                {/* Left drop */}
-                <div className={`absolute top-0 left-1/4 w-px h-10 ${LINE}`}></div>
-                {/* Right drop */}
-                <div className={`absolute top-0 right-1/4 w-px h-10 ${LINE}`}></div>
-
-                {/* ── Level 2 Cards ─────────────────────── */}
-                <div className="flex w-full justify-around pt-10 gap-4">
-                  <OrgNode
-                    name="Bernardino"
-                    role="IT Custodian"
-                    imgSrc={imgBernardino}
-                    size="md"
-                  />
-                  <OrgNode
-                    name="Rachel"
-                    role="IT Clerk"
-                    imgSrc={imgRachel}
-                    size="md"
-                  />
+            {loading ? (
+                <div className="flex justify-center items-center py-24">
+                   <div className="w-10 h-10 rounded-full border-4 border-[#5671FF]/30 border-t-[#5671FF] animate-spin"></div>
                 </div>
-              </div>
-
-              {/* Line down from L2 to L3 */}
-              <div className={`w-px h-10 mt-0 ${LINE}`}></div>
-
-              {/* ── Level 3: Faculty label ────────────── */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#5671FF]/20 bg-[#5671FF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#5671FF] mb-6">
-                Faculty
-              </div>
-
-              {/* ── Level 3: Faculty grid with connecting lines ─── */}
-              <div className="w-full relative">
-                {/* Top horizontal bar across all faculty */}
-                <div className={`hidden md:block absolute top-0 left-0 right-0 h-px ${LINE}`}></div>
-
-                {/* Faculty grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-x-4 gap-y-8 pt-0 md:pt-8">
-                  {facultyMembers.map((member, idx) => (
-                    <div key={idx} className="flex flex-col items-center relative">
-                      {/* Vertical drop from top bar to card */}
-                      <div className={`hidden md:block w-px h-8 ${LINE} mb-0`}></div>
-                      <OrgNode
-                        name={member.name}
-                        role="Faculty"
-                        imgSrc={member.imgSrc}
-                        size="sm"
-                      />
-                    </div>
-                  ))}
+            ) : members.length === 0 ? (
+                <div className="text-center py-16">
+                   <p className="text-slate-400">The organizational chart is currently empty.</p>
                 </div>
-              </div>
-            </div>
+            ) : (
+                <div className="flex flex-col items-center">
+                  {programHead && (
+                      <>
+                        <OrgNode
+                          name={programHead.name}
+                          role={programHead.role}
+                          imgSrc={programHead.image_url}
+                          size="lg"
+                        />
+                        <div className={`w-px h-10 ${LINE}`}></div>
+                      </>
+                  )}
+
+                  {/* ── Horizontal bar for L2 ─────────────── */}
+                  {(custodian || clerk) && (
+                      <>
+                        <div className="relative w-full max-w-lg flex items-start justify-center">
+                          <div className={`absolute top-0 left-1/4 right-1/4 h-px ${LINE}`}></div>
+                          <div className={`absolute top-0 left-1/4 w-px h-10 ${LINE}`}></div>
+                          <div className={`absolute top-0 right-1/4 w-px h-10 ${LINE}`}></div>
+
+                          <div className="flex w-full justify-around pt-10 gap-4">
+                            {custodian ? (
+                                <OrgNode
+                                  name={custodian.name}
+                                  role={custodian.role}
+                                  imgSrc={custodian.image_url}
+                                  size="md"
+                                />
+                            ) : <div className="w-48"></div>}
+                            
+                            {clerk ? (
+                                <OrgNode
+                                  name={clerk.name}
+                                  role={clerk.role}
+                                  imgSrc={clerk.image_url}
+                                  size="md"
+                                />
+                            ) : <div className="w-48"></div>}
+                          </div>
+                        </div>
+                        <div className={`w-px h-10 mt-0 ${LINE}`}></div>
+                      </>
+                  )}
+
+                  {/* ── Level 3: Faculty label ────────────── */}
+                  {facultyMembers.length > 0 && (
+                      <>
+                        <div className="inline-flex items-center gap-2 rounded-full border border-[#5671FF]/20 bg-[#5671FF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#5671FF] mb-6">
+                          Faculty & Staff
+                        </div>
+
+                        {/* ── Level 3: Faculty grid with connecting lines ─── */}
+                        <div className="w-full relative">
+                          <div className={`hidden md:block absolute top-0 left-0 right-0 h-px ${LINE}`}></div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-x-4 gap-y-8 pt-0 md:pt-8">
+                            {facultyMembers.map((member, idx) => (
+                              <div key={idx} className="flex flex-col items-center relative">
+                                <div className={`hidden md:block w-px h-8 ${LINE} mb-0`}></div>
+                                <OrgNode
+                                  name={member.name}
+                                  role={member.role}
+                                  imgSrc={member.image_url}
+                                  size="sm"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                  )}
+                </div>
+            )}
 
           </div>
         </section>

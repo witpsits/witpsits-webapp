@@ -14,7 +14,10 @@ import {
   Upload,
   Rocket,
   Info,
+  Loader2,
+  CheckCircle2
 } from "lucide-react";
+import { supabase } from "../../lib/supabaseClient";
 
 const CreateContent = () => {
   const navigate = useNavigate();
@@ -30,11 +33,13 @@ const CreateContent = () => {
   const [contentType, setContentType] = useState(getInitialType());
   const [formData, setFormData] = useState({
     title: "",
-    category: "Events",
+    category: contentType === "resource" ? "Study Guides" : contentType === "news" ? "Campus News" : "Events",
     body: "",
     linkUrl: "",
     file: null,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(null); // 'uploading', 'saving', 'success', 'error'
 
   const handleClose = () => {
     navigate(-1); // Go back to previous page
@@ -43,13 +48,11 @@ const CreateContent = () => {
   const handleTypeChange = (type) => {
     setContentType(type);
     // Update category based on type
-    if (type === "announcement") {
-      setFormData({ ...formData, category: "Events" });
-    } else if (type === "news") {
-      setFormData({ ...formData, category: "Campus News" });
-    } else if (type === "resource") {
-      setFormData({ ...formData, category: "Study Guides" });
-    }
+    let category = "Events";
+    if (type === "news") category = "Campus News";
+    else if (type === "resource") category = "Study Guides";
+    
+    setFormData({ ...formData, category });
   };
 
   const handleInputChange = (e) => {
@@ -62,11 +65,71 @@ const CreateContent = () => {
     setFormData({ ...formData, file });
   };
 
-  const handleSubmit = (isDraft = false) => {
-    console.log("Submitting:", { ...formData, contentType, isDraft });
-    // Add your submit logic here
-    // navigate back after submission
-    navigate(-1);
+  const handleSubmit = async (isDraft = false) => {
+    if (!formData.title) {
+        alert("Please enter a title.");
+        return;
+    }
+
+    setIsSubmitting(true);
+    setUploadStatus('uploading');
+    
+    try {
+      let fileUrl = formData.linkUrl;
+      
+      // 1. Upload file if exists
+      if (formData.file) {
+        const fileExt = formData.file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const folder = contentType === "resource" ? "prospectuses" : "events";
+        const filePath = `${folder}/${fileName}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('public-assets')
+          .upload(filePath, formData.file);
+          
+        if (uploadError) throw uploadError;
+        
+        const { data: { publicUrl } } = supabase.storage
+          .from('public-assets')
+          .getPublicUrl(filePath);
+          
+        fileUrl = publicUrl;
+      }
+
+      setUploadStatus('saving');
+
+      // 2. Insert into database
+      if (contentType === "resource") {
+        const { error: dbError } = await supabase.from('prospectuses').insert([{
+            name: formData.title,
+            category: formData.category,
+            format: formData.file ? formData.file.name.split('.').pop().toUpperCase() : 'URL',
+            file_url: fileUrl
+        }]);
+        if (dbError) throw dbError;
+      } else {
+        // News and Announcements both go to events for homepage rendering
+        const { error: dbError } = await supabase.from('events').insert([{
+            title: formData.title,
+            description: formData.body,
+            image_url: fileUrl,
+            is_published: !isDraft,
+            event_date: new Date().toISOString()
+        }]);
+        if (dbError) throw dbError;
+      }
+
+      setUploadStatus('success');
+      setTimeout(() => navigate(-1), 1500);
+
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to submit content: " + error.message);
+      setUploadStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getCategoryOptions = () => {
@@ -293,16 +356,28 @@ const CreateContent = () => {
           <div className="flex items-center gap-3 w-full md:w-auto">
             <button
               onClick={() => handleSubmit(true)}
-              className="flex-1 md:flex-none px-8 py-3 rounded-xl border-2 border-[#5671FF]/50 text-[#5671FF] font-bold text-sm hover:bg-[#5671FF]/5 transition-all active:scale-95"
+              disabled={isSubmitting}
+              className="flex-1 md:flex-none px-8 py-3 rounded-xl border-2 border-[#5671FF]/50 text-[#5671FF] font-bold text-sm hover:bg-[#5671FF]/5 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
             >
+              {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
               Save as Draft
             </button>
             <button
               onClick={() => handleSubmit(false)}
-              className="flex-1 md:flex-none px-10 py-3 rounded-xl bg-[#5671FF] text-white font-bold text-sm shadow-lg shadow-[#5671FF]/30 hover:bg-[#5671FF]/90 transition-all active:scale-95 flex items-center justify-center gap-2"
+              disabled={isSubmitting}
+              className="flex-1 md:flex-none px-10 py-3 rounded-xl bg-[#5671FF] text-white font-bold text-sm shadow-lg shadow-[#5671FF]/30 hover:bg-[#5671FF]/90 transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              <Rocket className="w-4 h-4" />
-              Publish Content
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>{uploadStatus === 'uploading' ? 'Uploading...' : 'Saving...'}</span>
+                </>
+              ) : (
+                <>
+                  <Rocket className="w-4 h-4" />
+                  <span>Publish Content</span>
+                </>
+              )}
             </button>
           </div>
         </div>
