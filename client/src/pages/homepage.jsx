@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   ChevronRight,
@@ -7,11 +7,36 @@ import {
   BookOpen,
   Network,
   Rocket,
+  CalendarDays
 } from "lucide-react";
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
+import { supabase } from "../lib/supabaseClient";
 
 const Homepage = () => {
+  const [latestEvents, setLatestEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('events')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(3);
+        
+        if (error) throw error;
+        setLatestEvents(data || []);
+      } catch (error) {
+        console.error("Error fetching announcements:", error);
+      } finally {
+        setLoadingEvents(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
   return (
     <div className="min-h-screen bg-[#0E1528] font-['Space_Grotesk',sans-serif] text-slate-100 overflow-x-hidden">
       {/* Navigation */}
@@ -113,104 +138,55 @@ const Homepage = () => {
 
           {/* News Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Card 1 */}
-            <div className="group flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop"
-                  alt="Tech Summit 2024"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-[#FF602D]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="absolute right-4 top-4 rounded-lg bg-[#0E1528]/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase text-[#5671FF]">
-                  Conference
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">
-                  October 25, 2024
-                </span>
-                <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
-                  Tech Summit 2024
-                </h3>
-                <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Join us for a day of innovation featuring guest speakers from
-                  leading tech companies in Asia.
-                </p>
-                <div className="mt-auto flex items-center justify-between">
-                  <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
-                    Read Entry
-                  </button>
-                  <BookOpen className="w-5 h-5 text-[#5671FF]/50" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="group flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop"
-                  alt="Coding Bootcamp"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-[#FF602D]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="absolute right-4 top-4 rounded-lg bg-[#0E1528]/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase text-[#5671FF]">
-                  Workshop
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">
-                  November 10, 2024
-                </span>
-                <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
-                  Coding Bootcamp
-                </h3>
-                <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Master the art of full-stack development. Intense 48-hour
-                  challenge for WIT student developers.
-                </p>
-                <div className="mt-auto flex items-center justify-between">
-                  <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
-                    Read Entry
-                  </button>
-                  <Code className="w-5 h-5 text-[#5671FF]/50" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="group flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop"
-                  alt="Cybersecurity Workshop"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-[#FF602D]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="absolute right-4 top-4 rounded-lg bg-[#0E1528]/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase text-[#5671FF]">
-                  Alert
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <span className="mb-2 text-xs font-medium text-slate-500">
-                  December 05, 2024
-                </span>
-                <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors">
-                  Cybersecurity Workshop
-                </h3>
-                <p className="mb-6 text-sm leading-relaxed text-slate-400">
-                  Protect the digital frontier. Hands-on training on network
-                  security and ethical hacking.
-                </p>
-                <div className="mt-auto flex items-center justify-between">
-                  <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
-                    Read Entry
-                  </button>
-                  <Shield className="w-5 h-5 text-[#5671FF]/50" />
-                </div>
-              </div>
-            </div>
+            {loadingEvents ? (
+               <div className="col-span-full flex justify-center py-10">
+                  <div className="w-8 h-8 rounded-full border-4 border-[#5671FF]/30 border-t-[#5671FF] animate-spin"></div>
+               </div>
+            ) : latestEvents.length === 0 ? (
+               <div className="col-span-full text-center py-10 bg-[#1a2238] rounded-xl border border-[#5671FF]/20">
+                  <span className="material-symbols-outlined text-4xl text-[#5671FF]/30 mb-2 block">campaign</span>
+                  <h3 className="text-lg font-bold text-slate-300">No recent announcements</h3>
+                  <p className="text-sm text-slate-500">Check back later for system updates.</p>
+               </div>
+            ) : (
+                latestEvents.map((item, idx) => (
+                  <div key={item.id || idx} className="group flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all">
+                    <div className="relative h-48 overflow-hidden bg-[#0E1528] flex items-center justify-center">
+                      {item.image_url ? (
+                        <img
+                          src={item.image_url}
+                          alt={item.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      ) : (
+                        <CalendarDays className="w-12 h-12 text-[#5671FF]/20" />
+                      )}
+                      
+                      <div className="absolute inset-0 bg-[#FF602D]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute right-4 top-4 rounded-lg bg-[#0E1528]/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase text-[#5671FF]">
+                        Announcement
+                      </div>
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <span className="mb-2 text-xs font-medium text-slate-500">
+                        {item.event_date ? new Date(item.event_date).toLocaleDateString() : new Date(item.created_at).toLocaleDateString()}
+                      </span>
+                      <h3 className="mb-3 text-lg font-bold text-slate-100 group-hover:text-[#5671FF] transition-colors line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <p className="mb-6 text-sm leading-relaxed text-slate-400 line-clamp-3">
+                        {item.description || "No further details provided."}
+                      </p>
+                      <div className="mt-auto flex items-center justify-between">
+                        <button className="text-xs font-bold uppercase tracking-widest text-[#5671FF] hover:underline">
+                          Read Entry
+                        </button>
+                        <BookOpen className="w-5 h-5 text-[#5671FF]/50" />
+                      </div>
+                    </div>
+                  </div>
+                ))
+            )}
           </div>
         </section>
 

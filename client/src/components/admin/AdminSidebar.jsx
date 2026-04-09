@@ -1,0 +1,79 @@
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Bell, FileText, History, ChevronLeft, Users, Calendar, Award, BookOpen } from "lucide-react";
+import { supabase } from "../../lib/supabaseClient";
+
+const AdminSidebar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/login");
+  };
+
+  const navLinks = [
+    { name: "Manage Announcements", path: "/admin", icon: Bell },
+    { name: "Manage News", path: "/admin/news", icon: FileText },
+    { name: "Academic Resources", path: "/admin/resources", icon: FileText },
+    { name: "Manage Org Chart", path: "/admin/org-chart", icon: Users },
+    { name: "Manage Events", path: "/admin/events", icon: Calendar },
+    { name: "Manage Achievements", path: "/admin/achievements", icon: Award },
+    { name: "Manage Prospectus", path: "/admin/prospectus", icon: BookOpen },
+    { name: "User Logs", path: "/admin/logs", icon: History },
+  ];
+
+  return (
+    <aside className="w-72 bg-[#0E1528] border-r border-[#5671FF]/20 flex flex-col justify-between p-6 h-screen overflow-y-auto">
+      <div className="flex flex-col gap-8">
+        <div className="flex items-center gap-3">
+          <div className="bg-[#5671FF]/10 rounded-full p-2 ring-1 ring-[#5671FF]/30">
+            <img src="/assets/PSITS_logo.png" alt="PSITS Logo" className="w-8 h-8 object-contain" />
+          </div>
+          <div className="flex flex-col">
+            <h1 className="text-white text-base font-bold leading-tight">PSITS-WIT</h1>
+            <p className="text-[#5671FF]/60 text-xs font-medium">Super Admin</p>
+          </div>
+        </div>
+        <nav className="flex flex-col gap-2">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                  isActive
+                    ? "bg-[#5671FF] text-white shadow-lg shadow-[#5671FF]/20 font-semibold"
+                    : "text-slate-400 hover:bg-[#5671FF]/10 hover:text-[#5671FF] font-medium"
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                <p className="text-sm">{link.name}</p>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+      <div className="flex flex-col gap-4 mt-8">
+        <div className="flex items-center gap-3 p-3 bg-[#5671FF]/5 rounded-xl border border-[#5671FF]/10">
+          <div className="h-10 w-10 rounded-full bg-[#5671FF]/20 flex items-center justify-center text-[#5671FF] font-bold">JD</div>
+          <div className="flex flex-col overflow-hidden">
+            <p className="text-xs font-bold truncate">Admin</p>
+            <p className="text-[10px] text-slate-500">Authorized</p>
+          </div>
+        </div>
+        <button 
+          onClick={handleLogout}
+          className="w-full bg-slate-800 text-slate-200 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-red-500 hover:text-white transition-colors"
+        >
+          <ChevronLeft className="w-4 h-4" />
+          Logout
+        </button>
+      </div>
+    </aside>
+  );
+};
+
+export default AdminSidebar;

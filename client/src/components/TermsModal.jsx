@@ -48,108 +48,90 @@ const TermsModal = () => {
                     </button>
                 </div>
 
-                {/* Scrollable Content */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-8 bg-[#0E1528] scrollbar-thin scrollbar-thumb-[#5671FF] scrollbar-track-[#5671FF]/10">
-                    {/* Section: User Responsibility */}
+                    {/* Section: Academic Integrity & Conduct */}
                     <section>
                         <div className="flex items-center gap-2 mb-3">
                             <span className="material-symbols-outlined text-[#5671FF] text-xl">
-                                account_circle
+                                account_balance
                             </span>
-                            <h3 className="text-lg font-bold text-[#5671FF]">User Responsibility</h3>
+                            <h3 className="text-lg font-bold text-[#5671FF]">Academic Integrity & Institutional Conduct</h3>
                         </div>
                         <div className="space-y-4 text-slate-300 leading-relaxed text-sm">
                             <p>
-                                By accessing the PSITS - WIT Chapter platform, you acknowledge that
-                                you are a registered student or faculty member of the Western
-                                Institute of Technology. You are responsible for maintaining the
-                                confidentiality of your account credentials.
+                                By accessing the official Information Technology (IT) platform of the Western Institute of Technology (WIT) - PSITS Chapter, you formally acknowledge your status as a registered scholar or faculty member of the institution. You agree to be strictly bound by the academic policies, computing ethics, and behavioral standards dictated by the College of Information Technology and the Office of Student Affairs.
                             </p>
                             <p>
-                                Any activity performed through your account is your sole
-                                responsibility. Users are expected to conduct themselves
-                                professionally and ethically, reflecting the values of the
-                                Information Technology profession.
+                                You bear incontrovertible responsibility for securing your authenticated credentials. Furthermore, you stipulate that all interactions conducted under your digital identity shall exhibit the highest degree of professionalism, propriety, and intellectual honesty, reflecting the core competencies expected of aspiring IT professionals.
                             </p>
                         </div>
                     </section>
 
-                    {/* Section: Organization Guidelines */}
+                    {/* Section: Platform Utilization & Governance */}
                     <section>
                         <div className="flex items-center gap-2 mb-3">
                             <span className="material-symbols-outlined text-[#5671FF] text-xl">
-                                account_tree
+                                policy
                             </span>
                             <h3 className="text-lg font-bold text-[#5671FF]">
-                                Organization Guidelines
+                                Platform Utilization & Governance
                             </h3>
                         </div>
                         <div className="space-y-4 text-slate-300 leading-relaxed text-sm">
                             <p>
-                                The PSITS platform is designed to facilitate academic growth,
-                                networking, and organizational efficiency. Users must adhere to the
-                                following community standards:
+                                The PSITS portal is an academic instrument engineered to optimize institutional communication, bureaucratic efficiency, and pedagogical resource distribution. To maintain the integrity of this digital ecosystem, members are categorically enjoined from the following:
                             </p>
                             <ul className="list-disc pl-5 space-y-2 text-[#5671FF]/80">
                                 <li>
                                     <span className="text-slate-300">
-                                        No harassment or cyberbullying of fellow members.
+                                        Perpetrating any form of cyber-harassment, discrimination, or digital malfeasance against institutional peers or faculty.
                                     </span>
                                 </li>
                                 <li>
                                     <span className="text-slate-300">
-                                        Accurate representation of organizational roles and academic
-                                        status.
+                                        Falsifying academic standing, organizational hierarchy, or institutional affiliation.
                                     </span>
                                 </li>
                                 <li>
                                     <span className="text-slate-300">
-                                        Compliance with the WIT Student Handbook and National PSITS
-                                        regulations.
+                                        Engaging in actions that contravene the stipulations outlined in the institutional Student Handbook or the constitutional bylaws of the PSITS National Federation.
                                     </span>
                                 </li>
                             </ul>
                         </div>
                     </section>
 
-                    {/* Section: Content Usage */}
+                    {/* Section: Intellectual Property */}
                     <section>
                         <div className="flex items-center gap-2 mb-3">
                             <span className="material-symbols-outlined text-[#5671FF] text-xl">
-                                description
+                                copyright
                             </span>
-                            <h3 className="text-lg font-bold text-[#5671FF]">Content Usage</h3>
+                            <h3 className="text-lg font-bold text-[#5671FF]">Intellectual Property Rights</h3>
                         </div>
                         <div className="space-y-4 text-slate-300 leading-relaxed text-sm">
                             <p>
-                                All resources, academic materials, and news published on this
-                                platform are protected by intellectual property rights. You are
-                                permitted to use these materials for personal academic purposes
-                                only.
+                                All academic prospectuses, institutional announcements, proprietary frameworks, and ancillary literature disseminated through this platform fall under the purview of strict intellectual property protections held by the Western Institute of Technology. Authorized personnel and active students are granted a non-transferable mandate to utilize these materials strictly for personal scholarly advancement.
                             </p>
                             <p>
-                                Redistribution, commercial use, or unauthorized modification of
-                                platform content is strictly prohibited without prior written
-                                consent from the WIT Chapter Administration.
+                                Any unauthorized replication, commercial exploitation, or extra-institutional distribution of proprietary content is emphatically prohibited, and any infringement thereof shall be subject to disciplinary adjudication by the appropriate academic tribunal.
                             </p>
                         </div>
                     </section>
 
-                    {/* Section: Privacy & Data */}
+                    {/* Section: Privacy Jurisprudence */}
                     <section>
                         <div className="flex items-center gap-2 mb-3">
                             <span className="material-symbols-outlined text-[#5671FF] text-xl">
-                                security
+                                gpp_good
                             </span>
                             <h3 className="text-lg font-bold text-[#5671FF]">
-                                Privacy & Data Protection
+                                Privacy Jurisprudence
                             </h3>
                         </div>
                         <div className="space-y-4 text-slate-300 leading-relaxed text-sm">
                             <p>
-                                We value your privacy. Your personal data is collected solely for
-                                organizational management and verification. We do not sell or share
-                                your information with third-party advertisers.
+                                Institutional governance prioritizing your digital privacy is maintained in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). Personal identifiers are extracted exclusively for verifying academic enrollment and managing organizational logistics. The administration unequivocally renounces the unauthorized monetization or external brokering of constituent demographic data.
                             </p>
                         </div>
                     </section>

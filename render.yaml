@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: witpsits-webapp
+    env: node
+    rootDir: client
+    buildCommand: npm install && npm run build
+    startCommand: npm start

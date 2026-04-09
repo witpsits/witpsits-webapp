@@ -2,7 +2,7 @@ import React from 'react';
 
 const CommitteeCard = ({ icon, members, title, description, avatars, extraCount }) => {
   return (
-    <div className="flex flex-col bg-[#1a2238]/80 backdrop-blur-md border border-[#5671FF]/20 hover:border-[#5671FF]/40 rounded-2xl p-6 transition-all hover:shadow-[0_0_20px_rgba(86,113,255,0.05)] group">
+    <div className="flex flex-col bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF]/40 rounded-2xl p-6 transition-all hover:shadow-[0_0_20px_rgba(86,113,255,0.1)] group">
       <div className="flex justify-between items-start mb-6">
         <div className="w-10 h-10 rounded-lg bg-[#5671FF]/10 flex items-center justify-center text-[#5671FF] group-hover:bg-[#5671FF] group-hover:text-white transition-colors">
           {icon}
