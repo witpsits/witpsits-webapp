@@ -73,20 +73,17 @@ const PrivacyModal = () => {
                         <section>
                             <h3 className="text-lg font-semibold text-slate-100 mb-3 flex items-center gap-2">
                                 <span className="size-1.5 bg-[#5671FF] rounded-full"></span>
-                                Data Protection & Privacy
+                                Institutional Data Stewardship
                             </h3>
                             <p className="text-slate-400 leading-relaxed text-sm">
-                                The PSITS - WIT Chapter prioritizes the security of your student
-                                information. We implement rigorous security protocols to ensure your
-                                digital identity remains within our secure ecosystem. We never share
-                                your sensitive data with third parties without explicit consent.
+                                The PSITS - WIT Chapter exercises uncompromising stewardship over constituent data. In strict adherence to the Data Privacy Act of 2012 (RA 10173), our digital infrastructure deploys cryptographic protocols to ensure the absolute confidentiality and integrity of your academic identity. We categorically prohibit the unauthorized dissemination, commercialization, or third-party brokering of sensitive institutional data.
                             </p>
                         </section>
 
                         <section>
                             <h3 className="text-lg font-semibold text-slate-100 mb-4 flex items-center gap-2">
                                 <span className="size-1.5 bg-[#5671FF] rounded-full"></span>
-                                Information We Collect
+                                Extracted Data Taxonomies
                             </h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -95,9 +92,9 @@ const PrivacyModal = () => {
                                         badge
                                     </span>
                                     <div>
-                                        <p className="text-slate-200 text-sm font-medium">Full Name</p>
+                                        <p className="text-slate-200 text-sm font-medium">Nominal Registration</p>
                                         <p className="text-slate-500 text-xs uppercase tracking-tighter">
-                                            Identity Verification
+                                            Cryptographic Identity Verification
                                         </p>
                                     </div>
                                 </div>
@@ -108,10 +105,10 @@ const PrivacyModal = () => {
                                     </span>
                                     <div>
                                         <p className="text-slate-200 text-sm font-medium">
-                                            Institutional Email
+                                            Institutional Telemetry
                                         </p>
                                         <p className="text-slate-500 text-xs uppercase tracking-tighter">
-                                            Academic Communications
+                                            Authorized Academic Dispatch
                                         </p>
                                     </div>
                                 </div>
@@ -122,10 +119,10 @@ const PrivacyModal = () => {
                                     </span>
                                     <div>
                                         <p className="text-slate-200 text-sm font-medium">
-                                            Year & Section
+                                            Cohort & Stratification Designations
                                         </p>
                                         <p className="text-slate-500 text-xs uppercase tracking-tighter">
-                                            Academic Grouping & Resource Access
+                                            Pedagogical Resource Segregation & Access Control
                                         </p>
                                     </div>
                                 </div>

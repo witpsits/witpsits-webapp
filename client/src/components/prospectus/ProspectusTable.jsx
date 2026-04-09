@@ -11,7 +11,7 @@ const documents = [
     },
 ];
 
-const ProspectusTable = () => {
+const ProspectusTable = ({ onDownload }) => {
     return (
         <div className="bg-[#1a2238] rounded-xl border border-[#5671FF]/20 overflow-hidden">
             <div className="overflow-x-auto">
@@ -72,9 +72,10 @@ const ProspectusTable = () => {
                                             </span>
                                         </a>
                                         <a
-                                            className="flex items-center gap-2 px-4 py-2 bg-[#5671FF] text-white text-xs font-bold rounded-lg hover:bg-[#5671FF]/90 transition-all shadow-md shadow-[#5671FF]/10"
+                                            className="flex items-center gap-2 px-4 py-2 bg-[#5671FF] text-white text-xs font-bold rounded-lg hover:bg-[#5671FF]/90 transition-all shadow-md shadow-[#5671FF]/10 cursor-pointer"
                                             href={doc.url}
                                             download={`${doc.name}.pdf`}
+                                            onClick={() => onDownload && onDownload()}
                                         >
                                             <span className="material-symbols-outlined text-sm">
                                                 download
