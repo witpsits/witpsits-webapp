@@ -14,7 +14,7 @@ import imgDerla from "../assets/faculties/derla.jpg";
 import imgEspina from "../assets/faculties/espina.jpg";
 import imgFirmalino from "../assets/faculties/firmalino.jpg";
 import imgJomel from "../assets/faculties/jomel.jpg";
-import imgKempee from "../assets/faculties/Kempee.jpg";
+import imgKempee from "../assets/faculties/kempee.jpg";
 import imgLilian from "../assets/faculties/lilian.jpg";
 import imgMogib from "../assets/faculties/mogib.jpg";
 import imgNarte from "../assets/faculties/narte.jpg";
