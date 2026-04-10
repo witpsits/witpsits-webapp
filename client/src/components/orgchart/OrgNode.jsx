@@ -11,12 +11,16 @@ const OrgNode = ({ name, role, imgSrc, size = 'md' }) => {
   return (
     <div className={`${s.card} flex flex-col items-center bg-[#111827] border border-[#5671FF]/30 rounded-2xl px-4 py-5 transition-all duration-300 hover:border-[#5671FF]/70 hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] group`}>
       {/* Circular image with ring */}
-      <div className={`${s.img} rounded-full p-0.5 bg-gradient-to-br from-[#5671FF] to-[#5671FF]/30 mb-3 shrink-0`}>
-        <img
-          src={imgSrc}
-          alt={name}
-          className="w-full h-full rounded-full object-cover object-top"
-        />
+      <div className={`${s.img} rounded-full p-[2px] bg-gradient-to-br from-[#5671FF] to-[#5671FF]/30 mb-3 shrink-0`}>
+        {/* Inner wrapper ensures image fills the ring without being clipped or shrunk */}
+        <div className="w-full h-full rounded-full overflow-hidden">
+          <img
+            src={imgSrc}
+            alt={name}
+            className="w-full h-full object-cover object-top"
+            style={{ display: 'block' }}
+          />
+        </div>
       </div>
       {/* Name */}
       <p className={`${s.name} font-semibold text-white text-center leading-tight mb-1`}>{name}</p>
