@@ -1,23 +1,60 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthProvider';
+import { supabase } from '../lib/supabaseClient';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
+  const location = useLocation();
+  const [isAuthorized, setIsAuthorized] = useState(null);
 
-  // Basic check: Ensure user is logged in. 
-  // Wait, the user asked to make sure "ordinary users" cannot access the admin site.
-  // Realistically we can check user.user_metadata?.is_admin
-  // Or check if the email follows a specific admin format.
-  // For now, we'll check if a user is logged in at all, and optionally check metadata.
+  const isAdminPath = location.pathname.startsWith('/admin');
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (!user || !isAdminPath) {
+        setIsAuthorized(true);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('authorized_admins')
+          .select('email')
+          .eq('email', user.email)
+          .single();
+
+        if (error || !data) {
+          console.warn("Unauthorized access attempt blocked.");
+          setIsAuthorized(false);
+        } else {
+          setIsAuthorized(true);
+        }
+      } catch (err) {
+        setIsAuthorized(false);
+      }
+    };
+
+    checkAdminStatus();
+  }, [user, isAdminPath]);
+
   if (!user) {
-    return <Navigate to="/login" replace />;
+    const loginPath = isAdminPath ? "/admin/login" : "/login";
+    return <Navigate to={loginPath} replace />;
   }
 
-  // Example Admin Check (uncomment/modify as you deploy actual admin rules):
-  // if (!user.user_metadata?.is_admin && user.email !== 'admin@wit.edu.ph') {
-  //   return <Navigate to="/" replace />;
-  // }
+  // Waiting for database verification
+  if (isAdminPath && isAuthorized === null) {
+    return (
+      <div className="min-h-screen bg-[#0E1528] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-[#5671FF] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (isAdminPath && isAuthorized === false) {
+    return <Navigate to="/" replace />;
+  }
 
   return children;
 };

@@ -12,6 +12,7 @@ import ManageEvents from "./components/admin/ManageEvents";
 import ManageAchievements from "./components/admin/ManageAchievements";
 import ManageProspectus from "./components/admin/ManageProspectus";
 import CreateContent from "./components/admin/contentForm";
+import AdminLogin from "./components/admin/AdminLogin";
 import OrgChart from "./pages/orgchart";
 import FaqPage from "./pages/faq";
 import Login from "./pages/login";
@@ -59,6 +60,8 @@ function App() {
             />
             <Route path="/admin/create-news" element={<ProtectedRoute><CreateContent /></ProtectedRoute>} />
             <Route path="/admin/create-resource" element={<ProtectedRoute><CreateContent /></ProtectedRoute>} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/edit/:id" element={<ProtectedRoute><CreateContent /></ProtectedRoute>} />
           </Routes>
         </Router>
       </ClickSpark>
