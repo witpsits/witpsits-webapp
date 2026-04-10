@@ -39,7 +39,7 @@ const ProtectedRoute = ({ children }) => {
   }, [user, isAdminPath]);
 
   if (!user) {
-    const loginPath = isAdminPath ? "/admin/login" : "/login";
+    const loginPath = isAdminPath ? "/" : "/login";
     return <Navigate to={loginPath} replace />;
   }
 

@@ -8,8 +8,8 @@ const AdminSidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    navigate("/", { replace: true });
     await supabase.auth.signOut();
-    navigate("/admin/login");
   };
 
   const navLinks = [
