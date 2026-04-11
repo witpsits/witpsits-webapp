@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { supabase } from "../lib/supabaseClient";
 import Navbar from "../components/navbar";
 import ProspectusHero from "../components/prospectus/ProspectusHero";
 import ProspectusTabs from "../components/prospectus/ProspectusTabs";
@@ -9,10 +10,45 @@ import Footer from "../components/footer";
 import PrivacyModal from "../components/PrivacyModal";
 
 const ProspectusPage = () => {
-  // Simulate realtime DB download count anchored to localStorage
+  const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({ totalDocs: 0, latestYear: 2024 });
+
+  // Simulate/Manage download count anchored to localStorage
   const [downloads, setDownloads] = useState(() => {
     return parseInt(localStorage.getItem("psitsDownloadsCount") || "1200", 10);
   });
+
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
+
+  const fetchDocuments = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('prospectuses')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      
+      const docs = data || [];
+      setDocuments(docs);
+      
+      // Calculate Stats
+      const yrs = docs.map(d => new Date(d.created_at).getFullYear());
+      const maxYear = yrs.length > 0 ? Math.max(...yrs) : 2024;
+      
+      setStats({
+        totalDocs: docs.length,
+        latestYear: maxYear
+      });
+    } catch (error) {
+      console.error("Error fetching prospectuses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     localStorage.setItem("psitsDownloadsCount", downloads.toString());
@@ -31,8 +67,16 @@ const ProspectusPage = () => {
         <div className="layout-content-container flex flex-col gap-4">
           <ProspectusHero />
           <ProspectusTabs />
-          <ProspectusStats downloads={downloads} />
-          <ProspectusTable onDownload={handleDownload} />
+          <ProspectusStats 
+            downloads={downloads} 
+            totalDocs={stats.totalDocs}
+            latestYear={stats.latestYear}
+          />
+          <ProspectusTable 
+            documents={documents} 
+            loading={loading}
+            onDownload={handleDownload} 
+          />
           <ProspectusAdvising />
         </div>
       </main>

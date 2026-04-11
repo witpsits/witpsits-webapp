@@ -1,46 +1,102 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ProspectusStats = ({ downloads = 1200 }) => {
-    // Format the number to look nice (e.g. 1200 -> 1,200)
-    const formattedDownloads = new Intl.NumberFormat('en-US').format(downloads);
+const AnimatedCounter = ({ target, duration = 1500, suffix = "" }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        let start = 0;
+        const end = parseInt(target);
+        if (start === end) {
+            setCount(end);
+            return;
+        };
+
+        let totalMiliseconds = duration;
+        let incrementTime = (totalMiliseconds / end);
+
+        let timer = setInterval(() => {
+            start += 1;
+            setCount(start);
+            if (start === end) clearInterval(timer);
+        }, incrementTime);
+
+        return () => clearInterval(timer);
+    }, [target, duration]);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-[#1a2238] p-6 rounded-xl border border-[#5671FF]/20">
-                <span className="material-symbols-outlined text-[#5671FF] mb-2">
-                    description
-                </span>
-                <div className="text-2xl font-bold">1</div>
-                <div className="text-sm text-slate-400">
-                    Total Documents
+        <span className="tabular-nums">
+            {new Intl.NumberFormat('en-US').format(count)}{suffix}
+        </span>
+    );
+};
+
+const ProspectusStats = ({ downloads = 1200, totalDocs = 0, latestYear = 2024 }) => {
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            {/* Total Documents */}
+            <div className="bg-[#1a2238] p-6 rounded-2xl border border-[#5671FF]/10 hover:border-[#5671FF]/40 transition-all group hover:shadow-[0_10px_30px_rgba(86,113,255,0.1)]">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#5671FF]/10 flex items-center justify-center text-[#5671FF] group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined">description</span>
+                    </div>
+                </div>
+                <div className="text-3xl font-black text-white">
+                    <AnimatedCounter target={totalDocs} />
+                </div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
+                    Database Files
                 </div>
             </div>
-            <div className="bg-[#1a2238] p-6 rounded-xl border border-[#5671FF]/20">
-                <span className="material-symbols-outlined text-[#5671FF] mb-2">
-                    update
-                </span>
-                <div className="text-2xl font-bold">2024</div>
-                <div className="text-sm text-slate-400">
-                    Latest Revision
+
+            {/* Latest Revision */}
+            <div className="bg-[#1a2238] p-6 rounded-2xl border border-[#5671FF]/10 hover:border-[#5671FF]/40 transition-all group hover:shadow-[0_10px_30px_rgba(86,113,255,0.1)]">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#FF602D]/10 flex items-center justify-center text-[#FF602D] group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined">update</span>
+                    </div>
+                    <div className="px-2 py-1 rounded-md bg-[#FF602D]/10 text-[#FF602D] text-[10px] font-black uppercase">Recent</div>
+                </div>
+                <div className="text-3xl font-black text-white">
+                    <AnimatedCounter target={latestYear} />
+                </div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
+                    Latest Version
                 </div>
             </div>
-            <div className="bg-[#1a2238] p-6 rounded-xl border border-[#5671FF]/20">
-                <span className="material-symbols-outlined text-[#5671FF] mb-2">
-                    download
-                </span>
-                <div className="text-2xl font-bold">
-                    <span className="animate-pulse-once">{formattedDownloads}</span>
+
+            {/* Total Downloads */}
+            <div className="bg-[#1a2238] p-6 rounded-2xl border border-[#5671FF]/10 hover:border-[#5671FF]/40 transition-all group hover:shadow-[0_10px_30px_rgba(86,113,255,0.1)] relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#5671FF]/10 flex items-center justify-center text-[#5671FF] group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined">download</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-green-500/10 text-green-500 text-[10px] font-black uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        Live
+                    </div>
                 </div>
-                <div className="text-sm text-slate-400">
-                    Total Downloads
+                <div className="text-3xl font-black text-white">
+                    <AnimatedCounter target={downloads} suffix="+" />
+                </div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
+                    Total Inquiries
                 </div>
             </div>
-            <div className="bg-[#1a2238] p-6 rounded-xl border border-[#5671FF]/20">
-                <span className="material-symbols-outlined text-[#5671FF] mb-2">
-                    verified
-                </span>
-                <div className="text-2xl font-bold">Official</div>
-                <div className="text-sm text-slate-400">Status</div>
+
+            {/* Status */}
+            <div className="bg-[#1a2238] p-6 rounded-2xl border border-[#5671FF]/10 hover:border-[#5671FF]/40 transition-all group hover:shadow-[0_10px_30px_rgba(86,113,255,0.1)]">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-blue-400/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined">verified</span>
+                    </div>
+                </div>
+                <div className="text-2xl font-black text-white flex items-center gap-2">
+                    Official
+                    <div className="w-2 h-2 rounded-full bg-[#5671FF] animate-ping"></div>
+                </div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
+                    Portal Status
+                </div>
             </div>
         </div>
     );

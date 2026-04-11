@@ -13,7 +13,7 @@ const ManageAchievements = () => {
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingAchievementId, setEditingAchievementId] = useState(null);
-  const [newAchievement, setNewAchievement] = useState({ title: '', description: '', date_achieved: '' });
+  const [newAchievement, setNewAchievement] = useState({ title: '', description: '', date_achieved: '', category: '' });
   const [fileToUpload, setFileToUpload] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -87,6 +87,7 @@ const ManageAchievements = () => {
         title: newAchievement.title,
         description: newAchievement.description,
         date_achieved: newAchievement.date_achieved ? new Date(newAchievement.date_achieved).toISOString() : null,
+        category: newAchievement.category || 'Others',
         ...(finalImageUrl && { image_url: finalImageUrl })
       };
 
@@ -119,7 +120,8 @@ const ManageAchievements = () => {
     setNewAchievement({ 
       title: achievement.title, 
       description: achievement.description || '', 
-      date_achieved: achievement.date_achieved ? new Date(achievement.date_achieved).toISOString().split('T')[0] : '' 
+      date_achieved: achievement.date_achieved ? new Date(achievement.date_achieved).toISOString().split('T')[0] : '',
+      category: achievement.category || ''
     });
     setIsModalOpen(true);
   };
@@ -127,7 +129,7 @@ const ManageAchievements = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditingAchievementId(null);
-    setNewAchievement({ title: '', description: '', date_achieved: '' });
+    setNewAchievement({ title: '', description: '', date_achieved: '', category: '' });
     setFileToUpload(null);
   }
 
@@ -177,7 +179,7 @@ const ManageAchievements = () => {
             <button 
               onClick={() => {
                 setEditingAchievementId(null);
-                setNewAchievement({ title: '', description: '', date_achieved: '' });
+                setNewAchievement({ title: '', description: '', date_achieved: '', category: '' });
                 setIsModalOpen(true);
               }}
               className="bg-[#FF602D] hover:bg-[#FF602D]/90 text-white px-4 lg:px-6 py-2.5 rounded-lg text-xs lg:text-sm font-bold shadow-lg shadow-[#FF602D]/30 flex items-center gap-2 transition-all active:scale-95"
@@ -257,6 +259,27 @@ const ManageAchievements = () => {
                          className="w-full bg-[#0E1528] border border-[#5671FF]/20 rounded-lg py-3 px-4 text-white focus:border-[#5671FF] outline-none [color-scheme:dark] transition-colors" 
                        />
                     </div>
+                    <div className="space-y-2">
+                       <label className="text-sm font-bold text-slate-300">Category</label>
+                       <div className="relative">
+                          <input 
+                            list="category-suggestions"
+                            value={newAchievement.category}
+                            onChange={(e) => setNewAchievement({...newAchievement, category: e.target.value})}
+                            className="w-full bg-[#0E1528] border border-[#5671FF]/20 rounded-lg py-3 px-4 text-white focus:border-[#5671FF] outline-none transition-colors" 
+                            placeholder="e.g. Competitions, Projects, Certifications"
+                          />
+                          <datalist id="category-suggestions">
+                             {[...new Set(achievements.map(a => a.category).filter(Boolean))].map(cat => (
+                                <option key={cat} value={cat} />
+                             ))}
+                             {!achievements.some(a => a.category === "Competitions") && <option value="Competitions" />}
+                             {!achievements.some(a => a.category === "Projects") && <option value="Projects" />}
+                             {!achievements.some(a => a.category === "Certifications") && <option value="Certifications" />}
+                          </datalist>
+                       </div>
+                       <p className="text-[10px] text-slate-500">Pick an existing category or type a new one.</p>
+                    </div>
                     <div className="pt-4 border-t border-[#5671FF]/10 flex justify-end gap-3 pb-2">
                        <button type="button" onClick={handleCloseModal} className="px-6 py-2.5 rounded-lg text-sm font-bold text-slate-400 hover:bg-white/5 transition-colors">Cancel</button>
                        <button type="submit" disabled={submitting} className="px-6 py-2.5 rounded-lg text-sm font-bold bg-[#FF602D] text-white hover:bg-[#FF602D]/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
@@ -305,6 +328,7 @@ const ManageAchievements = () => {
                   <thead>
                     <tr className="bg-white/5 text-slate-400 uppercase text-[10px] font-bold tracking-widest">
                       <th className="px-6 py-4">Title / Award</th>
+                      <th className="px-6 py-4">Category</th>
                       <th className="px-6 py-4">Description</th>
                       <th className="px-6 py-4">Date</th>
                       <th className="px-6 py-4 text-right">Actions</th>
@@ -324,6 +348,11 @@ const ManageAchievements = () => {
                               )}
                               <p className="font-bold text-white group-hover:text-[#5671FF] transition-colors">{item.title}</p>
                            </div>
+                        </td>
+                        <td className="px-6 py-5">
+                           <span className="px-2 py-1 rounded bg-[#5671FF]/10 text-[#5671FF] text-[10px] font-bold uppercase border border-[#5671FF]/20">
+                             {item.category || 'Uncategorized'}
+                           </span>
                         </td>
                         <td className="px-6 py-5 text-sm text-slate-400 max-w-md truncate">
                            {item.description || 'No description provided.'}

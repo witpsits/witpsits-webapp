@@ -333,109 +333,115 @@ const Homepage = () => {
       {/* Event Details Modal - Premium Upgrade */}
       {selectedEvent && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-6 md:p-12 transition-all duration-500 overflow-hidden"
+          className="fixed inset-0 z-[1100] flex items-center justify-center p-4 sm:p-12 md:p-16 transition-all duration-500 overflow-hidden"
           onClick={() => setSelectedEvent(null)}
         >
-          {/* Immersive Backdrop with Progressive Blur */}
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-700 animate-in fade-in"></div>
+          {/* Immersive Backdrop with Full Focus Focus */}
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-lg transition-opacity duration-700 animate-in fade-in"></div>
           
           {/* Pulsing Aura Glow behind modal */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-gradient-to-r from-[#5671FF]/20 to-[#FF602D]/20 rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-gradient-to-r from-[#5671FF]/10 to-[#FF602D]/10 rounded-full blur-[140px] animate-pulse pointer-events-none"></div>
 
           <div 
-            className="relative bg-[#1a2238]/90 backdrop-blur-2xl w-full max-w-4xl h-full sm:h-auto sm:max-h-[80vh] rounded-none sm:rounded-[2rem] border-0 sm:border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5),0_0_20px_rgba(86,113,255,0.1)] overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in slide-in-from-bottom-8 duration-500"
+            className="relative bg-[#0E1528]/95 backdrop-blur-3xl w-full max-w-4xl h-full sm:h-auto sm:max-h-[82vh] rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.8),0_0_40px_rgba(86,113,255,0.1)] overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in slide-in-from-bottom-10 duration-500"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Close Button (for mobile primarily) */}
-            <div className="absolute top-5 right-5 z-[110]">
+            {/* Cinematic Close Button */}
+            <div className="absolute top-6 right-6 z-[110]">
               <button 
                 onClick={() => setSelectedEvent(null)}
-                className="group p-2.5 bg-black/40 hover:bg-[#FF602D] text-white rounded-xl transition-all border border-white/10 backdrop-blur-md ring-1 ring-white/5 active:scale-95 shadow-xl"
+                className="group p-3 bg-white/5 hover:bg-[#FF602D] text-white rounded-2xl transition-all border border-white/10 backdrop-blur-xl hover:scale-110 active:scale-95 shadow-2xl"
+                aria-label="Close Story"
               >
-                <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+                <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" />
               </button>
             </div>
 
-            {/* Left Column: Visual Impact (Cinematic Image) */}
-            <div className="relative w-full md:w-[45%] h-64 md:h-auto overflow-hidden group/modal-img shrink-0">
+            {/* Left Column: Cinematic Visual */}
+            <div className="relative w-full md:w-[40%] h-64 md:h-auto overflow-hidden group/modal-img shrink-0 border-r border-white/5">
                {selectedEvent.image_url ? (
                   <img 
                     src={selectedEvent.image_url} 
                     alt={selectedEvent.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover/modal-img:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/modal-img:scale-110"
                   />
                 ) : (
                   <div className="w-full h-full bg-[#0E1528] flex items-center justify-center">
                     <CalendarDays className="w-24 h-24 text-[#5671FF]/10 animate-pulse" />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a2238] via-[#1a2238]/40 md:via-transparent to-transparent"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1a2238] hidden md:block"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E1528] via-transparent to-transparent opacity-80"></div>
                 
-                {/* Visual Label (Floating) */}
-                <div className="absolute top-8 left-8 hidden md:block">
-                  <div className="px-3 py-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl">
-                     <span className="text-[9px] font-black uppercase tracking-widest text-[#5671FF]">Latest Update</span>
+                {/* Visual Metadata Overlay */}
+                <div className="absolute bottom-8 left-8 hidden md:block">
+                  <div className="flex flex-col gap-1">
+                     <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[#5671FF]">TRANS-ID: WIT-PSITS</span>
+                     <span className="text-[10px] text-white/50 font-mono tracking-tighter uppercase">SECURE TRANSMISSION</span>
                   </div>
                 </div>
             </div>
 
-            {/* Right Column: Narrative Content */}
-            <div className="flex flex-col w-full md:w-[55%] overflow-y-auto scrollbar-hide bg-gradient-to-br from-[#1a2238] to-[#0E1528]">
-               {/* Reading Progress Indicator */}
-               <div className="h-0.5 shadow-[0_0_15px_rgba(86,113,255,0.3)] bg-gradient-to-r from-[#5671FF] to-[#FF602D] opacity-40 shrink-0"></div>
+            {/* Right Column: Focus Narrative */}
+            <div className="flex flex-col w-full md:w-[60%] overflow-y-auto scrollbar-hide bg-[#1a2238]/20">
+               {/* Reading Highlight bar */}
+               <div className="h-[2px] w-full bg-gradient-to-r from-[#5671FF] to-[#FF602D] opacity-30 shadow-[0_0_10px_rgba(86,113,255,0.5)]"></div>
 
-               <div className="p-8 sm:p-10 md:p-12 space-y-8">
-                  {/* Meta Tags Grid */}
-                  <div className="flex flex-wrap gap-3">
-                     <div className="flex items-center gap-2 px-3 py-1.5 bg-[#5671FF]/10 rounded-lg border border-[#5671FF]/20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5671FF] animate-pulse"></span>
-                        <span className="text-[9px] font-black uppercase tracking-widest text-[#5671FF]">SYSTEM ANNOUNCEMENT</span>
+               <div className="p-8 sm:p-12 md:p-14 space-y-10">
+                  {/* Meta Group */}
+                  <div className="flex flex-wrap items-center gap-4">
+                     <div className="flex items-center gap-2 px-3 py-1 bg-[#5671FF]/10 rounded-full border border-[#5671FF]/20 shadow-[0_0_15px_rgba(86,113,255,0.1)]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#5671FF] animate-ping"></div>
+                        <span className="text-[9px] font-black uppercase tracking-[0.1em] text-[#5671FF]">ANNOUNCEMENT</span>
                      </div>
-                     <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-lg border border-white/10">
-                        <Clock className="w-3 h-3 text-slate-400" />
-                        <span className="text-[9px] font-bold text-slate-400">
+                     <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest hidden sm:block">•</span>
+                     <div className="flex items-center gap-2 text-white/40">
+                        <Clock className="w-3 h-3" />
+                        <span className="text-[10px] font-bold tracking-widest uppercase">
                           {selectedEvent.event_date ? new Date(selectedEvent.event_date).toLocaleDateString() : new Date(selectedEvent.created_at).toLocaleDateString()}
                         </span>
                      </div>
                   </div>
 
-                  {/* Title & Entry Header */}
-                  <div className="space-y-3">
-                     <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.1] tracking-tight">
+                  {/* Title Segment */}
+                  <div className="space-y-4">
+                     <h2 className="text-3xl sm:text-4xl font-black text-white leading-[1.1] tracking-tight">
                         {selectedEvent.title}
                      </h2>
-                     <div className="h-1 w-12 bg-[#5671FF] rounded-full"></div>
+                     <div className="flex items-center gap-3">
+                        <div className="h-1 w-12 bg-[#5671FF] rounded-full"></div>
+                        <div className="h-1 w-1 bg-[#5671FF] rounded-full opacity-50"></div>
+                        <div className="h-1 w-1 bg-[#5671FF] rounded-full opacity-20"></div>
+                     </div>
                   </div>
 
-                  {/* Main Body Text (Prose) */}
+                  {/* Content Body */}
                   <div className="prose prose-invert max-w-none">
-                     <p className="text-slate-300 leading-[1.7] text-base font-medium whitespace-pre-wrap selection:bg-[#5671FF]/30">
-                        {selectedEvent.description || "The administrators have not provided a detailed description for this transmission at this time."}
+                     <p className="text-slate-200 leading-[1.9] text-[17px] sm:text-[18px] font-medium whitespace-pre-wrap selection:bg-[#5671FF]/40">
+                        {selectedEvent.description || "System protocols indicate that no detailed description was provided for this transmission node."}
                      </p>
                   </div>
 
-                  {/* Footer Action Area */}
-                  <div className="pt-8 mt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6">
-                     <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#0E1528] border border-white/10 flex items-center justify-center shadow-xl">
-                          <Rocket className="w-5 h-5 text-[#5671FF]" />
+                  {/* High-Impact Footer */}
+                  <div className="pt-12 mt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8">
+                     <div className="flex items-center gap-4 group/brand transition-all">
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-[#5671FF]/20 blur-xl opacity-0 group-hover/brand:opacity-100 transition-opacity"></div>
+                          <div className="relative w-11 h-11 rounded-2xl bg-[#0E1528] border border-white/10 flex items-center justify-center shadow-xl group-hover/brand:border-[#5671FF]/30 transition-all">
+                            <Rocket className="w-5 h-5 text-[#5671FF]" />
+                          </div>
                         </div>
                         <div className="flex flex-col">
-                           <span className="text-[11px] font-black text-white uppercase tracking-wider">PSITS WIT</span>
-                           <span className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Secure Node</span>
+                           <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">PSITS WIT OFFICIAL</span>
+                           <span className="text-[9px] text-white/30 uppercase tracking-widest">SECURE DATA BROADCAST</span>
                         </div>
                      </div>
                      
-                     <div className="flex gap-4 w-full sm:w-auto">
+                     <div className="w-full sm:w-auto">
                         <button 
                           onClick={() => setSelectedEvent(null)}
-                          className="flex-1 sm:flex-none px-8 py-3 bg-gradient-to-r from-[#5671FF] to-[#455cd9] hover:to-[#5671FF] text-white rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95 group"
+                          className="w-full sm:px-10 py-4 bg-[#5671FF] hover:bg-[#5671FF]/90 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.25em] transition-all hover:shadow-[0_15px_30px_rgba(86,113,255,0.25)] active:scale-95"
                         >
-                          <span className="flex items-center gap-2">
-                            CLOSE
-                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                          </span>
+                          CLOSE STORY
                         </button>
                      </div>
                   </div>
