@@ -311,17 +311,20 @@ const Homepage = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl text-center md:text-left">
               <h2 className="mb-2 text-3xl md:text-4xl font-black text-white">
-                Ready to join the revolution?
+                Ready to join our community?
               </h2>
               <p className="text-white/80">
-                Become a member of the PSITS WIT Chapter today and unlock
-                exclusive access to workshops, resources, and networking events.
+                Follow our official Facebook page today and get the latest updates on
+                upcoming workshops, resources, and networking events.
               </p>
             </div>
             <div className="flex flex-shrink-0 gap-4">
-              <button className="h-14 rounded-xl bg-white px-8 text-sm font-bold text-[#010101] transition-transform hover:scale-105">
-                Apply for Membership
-              </button>
+              <a 
+                href="https://www.facebook.com/wititdepartment" 
+                className="flex items-center justify-center h-14 rounded-xl bg-[#FF602D] px-8 text-sm font-bold text-white transition-transform hover:scale-105 hover:shadow-[0_0_25px_rgba(255,96,45,0.5)]"
+              >
+                Follow Our Facebook Page
+              </a>
             </div>
           </div>
         </section>
