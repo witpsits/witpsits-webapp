@@ -34,6 +34,7 @@ const ManageNews = () => {
       const { data, error } = await supabase
         .from('events')
         .select('*')
+        .eq('type', 'news')
         .order('created_at', { ascending: false });
       
       if (error) throw error;

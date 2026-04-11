@@ -26,7 +26,11 @@ const ManageEvents = () => {
 
   const fetchEvents = async () => {
     try {
-      const { data, error } = await supabase.from('events').select('*').order('created_at', { ascending: false });
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('type', 'event')
+        .order('created_at', { ascending: false });
       if (error) throw error;
       setEvents(data || []);
     } catch (error) {
@@ -91,7 +95,8 @@ const ManageEvents = () => {
           description: newEvent.description,
           image_url: finalImageUrl,
           event_date: newEvent.event_date ? new Date(newEvent.event_date).toISOString() : null,
-          is_published: newEvent.is_published 
+          is_published: newEvent.is_published,
+          type: 'event'
         }
       ]);
       

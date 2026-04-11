@@ -64,15 +64,17 @@ const CreateContent = () => {
       if (data) {
         setFormData({
           title: data.title || "",
-          category: data.category || (data.title?.toLowerCase().includes('news') ? "Campus News" : "Events"),
+          category: data.category || (data.type === 'news' ? "Campus News" : "Events"),
           body: data.description || "",
           linkUrl: data.image_url || "",
           file: null,
           existingImageUrl: data.image_url,
           eventDate: data.event_date ? new Date(data.event_date).toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16)
         });
-        // Heuristic to set content type
-        if (data.description && data.description.length > 200) setContentType("news");
+        
+        // Use the 'type' column definitively if available
+        if (data.type) setContentType(data.type);
+        else if (data.description && data.description.length > 200) setContentType("news");
         else setContentType("announcement");
       } else {
         // Try prospectuses
@@ -181,7 +183,8 @@ const CreateContent = () => {
           description: formData.body,
           image_url: fileUrl,
           is_published: !isDraft,
-          event_date: formData.eventDate ? new Date(formData.eventDate).toISOString() : new Date().toISOString()
+          event_date: formData.eventDate ? new Date(formData.eventDate).toISOString() : new Date().toISOString(),
+          type: contentType // announcement or news
       };
 
       if (isEditMode) {

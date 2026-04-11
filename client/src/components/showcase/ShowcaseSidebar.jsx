@@ -63,11 +63,6 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
                     </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-[#5671FF]/20 to-transparent border border-[#5671FF]/20">
-                    <h4 className="text-sm font-bold text-[#5671FF] mb-2">Have a new achievement?</h4>
-                    <p className="text-xs text-slate-400 mb-4 leading-relaxed">Share your success with the WIT community. Submit your entry to the showcase.</p>
-                    <button className="w-full py-2 bg-[#5671FF] text-white text-xs font-bold rounded-lg hover:brightness-110 transition-all shadow-md shadow-[#5671FF]/20">Submit Showcase</button>
-                </div>
             </div>
         </aside>
     );

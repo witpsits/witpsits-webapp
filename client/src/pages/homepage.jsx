@@ -23,9 +23,15 @@ const Homepage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayISO = today.toISOString();
+
         const { data, error } = await supabase
           .from('events')
           .select('*')
+          .eq('type', 'announcement')
+          .or(`event_date.gte.${todayISO},event_date.is.null`)
           .order('created_at', { ascending: false })
           .limit(3);
         
