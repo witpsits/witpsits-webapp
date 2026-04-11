@@ -78,6 +78,22 @@ const ManageOrgChart = () => {
     setSubmitting(true);
     
     try {
+      // Singular Role Validation
+      let targetId = editingMemberId;
+      const singularRoles = ["Program Head", "IT Custodian", "IT Clerk"];
+      
+      if (singularRoles.includes(newMember.role)) {
+        const existing = members.find(m => m.role === newMember.role && m.id !== editingMemberId);
+        if (existing) {
+          const replace = window.confirm(
+            `A ${newMember.role} already exists (${existing.name}). \n\nDo you want to REPLACE "${existing.name}" with "${newMember.name}"? \n\n(Click 'Cancel' to add as an additional member instead)`
+          );
+          if (replace) {
+            targetId = existing.id; // Switch to updating the existing record
+          }
+        }
+      }
+
       let finalImageUrl = null;
       if (fileToUpload) {
          finalImageUrl = await uploadAndCompressImage(fileToUpload);
@@ -89,8 +105,8 @@ const ManageOrgChart = () => {
         ...(finalImageUrl && { image_url: finalImageUrl })
       };
 
-      if (editingMemberId) {
-        const { error } = await supabase.from('org_chart').update(memberData).eq('id', editingMemberId);
+      if (targetId) {
+        const { error } = await supabase.from('org_chart').update(memberData).eq('id', targetId);
         if (error) throw error;
       } else {
         const { error } = await supabase.from('org_chart').insert([memberData]);

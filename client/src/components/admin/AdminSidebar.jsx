@@ -17,6 +17,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     { name: "Manage News", path: "/admin/news", icon: FileText },
     { name: "Academic Resources", path: "/admin/resources", icon: FileText },
     { name: "Manage Org Chart", path: "/admin/org-chart", icon: Users },
+    { name: "Manage PSITS Officers", path: "/admin/officers", icon: Users },
     { name: "Manage Events", path: "/admin/events", icon: Calendar },
     { name: "Manage Achievements", path: "/admin/achievements", icon: Award },
     { name: "Manage Prospectus", path: "/admin/prospectus", icon: BookOpen },

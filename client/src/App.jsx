@@ -8,6 +8,7 @@ import ManageNews from "./components/admin/manageNews";
 import AcademicResources from "./components/admin/academicResources";
 import UserLogs from "./components/admin/userLogs";
 import ManageOrgChart from "./components/admin/ManageOrgChart";
+import ManageOfficers from "./components/admin/ManageOfficers";
 import ManageEvents from "./components/admin/ManageEvents";
 import ManageAchievements from "./components/admin/ManageAchievements";
 import ManageProspectus from "./components/admin/ManageProspectus";
@@ -49,6 +50,7 @@ function App() {
             <Route path="/admin/resources" element={<ProtectedRoute><AcademicResources /></ProtectedRoute>} />
             <Route path="/admin/logs" element={<ProtectedRoute><UserLogs /></ProtectedRoute>} />
             <Route path="/admin/org-chart" element={<ProtectedRoute><ManageOrgChart /></ProtectedRoute>} />
+            <Route path="/admin/officers" element={<ProtectedRoute><ManageOfficers /></ProtectedRoute>} />
             <Route path="/admin/events" element={<ProtectedRoute><ManageEvents /></ProtectedRoute>} />
             <Route path="/admin/achievements" element={<ProtectedRoute><ManageAchievements /></ProtectedRoute>} />
             <Route path="/admin/prospectus" element={<ProtectedRoute><ManageProspectus /></ProtectedRoute>} />
