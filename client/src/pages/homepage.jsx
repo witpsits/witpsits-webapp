@@ -179,7 +179,7 @@ const Homepage = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-slate-300">No transmissions found at the moment</h3>
+                    <h3 className="text-xl font-bold text-slate-300">No updates found at the moment</h3>
                     <p className="text-sm text-slate-500 max-w-xs mx-auto">Our systems are currently awaiting new updates. Please check back shortly for the latest department bulletins.</p>
                   </div>
                </div>
