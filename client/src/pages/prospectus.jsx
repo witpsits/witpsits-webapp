@@ -90,9 +90,9 @@ const ProspectusPage = () => {
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={0.4}>
+          {/* <ScrollReveal delay={0.4}>
             <ProspectusAdvising />
-          </ScrollReveal>
+          </ScrollReveal> */}
         </div>
       </main>
 

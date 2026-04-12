@@ -70,10 +70,6 @@ const ProspectusStats = ({ downloads = 1200, totalDocs = 0, latestYear = 2024 })
                     <div className="w-10 h-10 rounded-xl bg-[#5671FF]/10 flex items-center justify-center text-[#5671FF] group-hover:scale-110 transition-transform">
                         <span className="material-symbols-outlined">download</span>
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-green-500/10 text-green-500 text-[10px] font-black uppercase">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                        Live
-                    </div>
                 </div>
                 <div className="text-3xl font-black text-white">
                     <AnimatedCounter target={downloads} suffix="+" />
@@ -92,7 +88,6 @@ const ProspectusStats = ({ downloads = 1200, totalDocs = 0, latestYear = 2024 })
                 </div>
                 <div className="text-2xl font-black text-white flex items-center gap-2">
                     Official
-                    <div className="w-2 h-2 rounded-full bg-[#5671FF] animate-ping"></div>
                 </div>
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
                     Portal Status
