@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Bell,
   Settings,
@@ -11,10 +11,6 @@ import {
   Edit,
   EyeOff,
   Trash2,
-  ChevronLeft,
-  ChevronRight,
-  BarChart3,
-  History,
   Loader2,
   Menu
 } from "lucide-react";
