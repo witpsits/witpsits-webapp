@@ -3,6 +3,7 @@ import { Plus, Search, Trophy, Edit, Trash2, X, UploadCloud, Menu } from "lucide
 import AdminSidebar from "./AdminSidebar";
 import { supabase } from "../../lib/supabaseClient";
 import imageCompression from 'browser-image-compression';
+import { motion } from "framer-motion";
 
 const ManageAchievements = () => {
   const [achievements, setAchievements] = useState([]);
@@ -257,24 +258,44 @@ const ManageAchievements = () => {
                     </div>
                     <div className="space-y-2">
                        <label className="text-sm font-bold text-slate-300">Category</label>
-                       <div className="relative">
-                          <input 
-                            list="category-suggestions"
-                            value={newAchievement.category}
-                            onChange={(e) => setNewAchievement({...newAchievement, category: e.target.value})}
-                            className="w-full bg-[#0E1528] border border-[#5671FF]/20 rounded-lg py-3 px-4 text-white focus:border-[#5671FF] outline-none transition-colors" 
-                            placeholder="e.g. Competitions, Projects, Certifications"
-                          />
-                          <datalist id="category-suggestions">
-                             {[...new Set(achievements.map(a => a.category).filter(Boolean))].map(cat => (
-                                <option key={cat} value={cat} />
-                             ))}
-                             {!achievements.some(a => a.category === "Competitions") && <option value="Competitions" />}
-                             {!achievements.some(a => a.category === "Projects") && <option value="Projects" />}
-                             {!achievements.some(a => a.category === "Certifications") && <option value="Certifications" />}
-                          </datalist>
-                       </div>
-                       <p className="text-[10px] text-slate-500">Pick an existing category or type a new one.</p>
+                       <select 
+                         value={newAchievement.category && ["Competitions", "Certifications", "Awards", "Projects", "Leadership", "Seminars", "Others"].includes(newAchievement.category) ? newAchievement.category : (newAchievement.category ? "custom" : "Others")}
+                         onChange={(e) => {
+                            if (e.target.value === "custom") {
+                              setNewAchievement({...newAchievement, category: ""});
+                            } else {
+                              setNewAchievement({...newAchievement, category: e.target.value});
+                            }
+                         }}
+                         className="w-full bg-[#0E1528] border border-[#5671FF]/20 rounded-lg py-3 px-4 text-white focus:border-[#5671FF] outline-none transition-colors appearance-none"
+                       >
+                          <option value="Competitions">Competitions & Hackathons</option>
+                          <option value="Certifications">Professional Certifications</option>
+                          <option value="Awards">Academic Awards & Honors</option>
+                          <option value="Projects">Innovative Projects</option>
+                          <option value="Leadership">Leadership Roles</option>
+                          <option value="Seminars">Seminars & Workshops</option>
+                          <option value="Others">Others</option>
+                          <option value="custom">-- Custom Category --</option>
+                       </select>
+                       
+                       {(!["Competitions", "Certifications", "Awards", "Projects", "Leadership", "Seminars", "Others"].includes(newAchievement.category) || (newAchievement.category === "")) && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mt-2"
+                          >
+                             <input 
+                               type="text"
+                               value={newAchievement.category}
+                               onChange={(e) => setNewAchievement({...newAchievement, category: e.target.value})}
+                               className="w-full bg-[#0E1528] border border-[#5671FF]/20 rounded-lg py-3 px-4 text-white focus:border-[#5671FF] outline-none transition-colors"
+                               placeholder="Type your custom category here..."
+                               autoFocus
+                             />
+                          </motion.div>
+                       )}
+                       <p className="text-[10px] text-slate-500">Categorize this achievement for better filtering on the showcase page.</p>
                     </div>
                     <div className="pt-4 border-t border-[#5671FF]/10 flex justify-end gap-3 pb-2">
                        <button type="button" onClick={handleCloseModal} className="px-6 py-2.5 rounded-lg text-sm font-bold text-slate-400 hover:bg-white/5 transition-colors">Cancel</button>
