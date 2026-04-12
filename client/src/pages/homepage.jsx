@@ -160,13 +160,6 @@ const Homepage = () => {
               </h2>
               <div className="h-1 w-20 bg-[#5671FF]"></div>
             </div>
-            <a
-              href="#"
-              className="group flex items-center gap-1 text-sm font-bold text-[#5671FF] transition-all"
-            >
-              Browse Archive
-              <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
           </div>
 
           {/* News Cards Grid */}

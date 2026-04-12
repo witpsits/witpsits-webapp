@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabaseClient';
 
 const LoginForm = () => {
@@ -30,11 +30,10 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-xl mx-auto">
             {/* Hero Card Section */}
             <div className="relative mb-8 group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#5671FF] to-[#FF602D] rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                <div className="relative bg-[#1a2238] border border-[#5671FF]/20 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(86,113,255,0.05)] backdrop-blur-sm">
+                <div className="relative bg-[#1a2238] border border-[#5671FF]/20 rounded-xl overflow-hidden shadow-xl backdrop-blur-sm">
                     <div className="h-32 w-full bg-[#5671FF]/10 relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-t from-[#1a2238] to-transparent opacity-80"></div>
                         <img
@@ -47,7 +46,7 @@ const LoginForm = () => {
                                 Student Login
                             </h2>
                             <p className="text-[#5671FF] text-xs font-bold uppercase tracking-widest mt-1">
-                                Academic Portal Access
+                                Login to your account
                             </p>
                         </div>
                     </div>
@@ -69,7 +68,7 @@ const LoginForm = () => {
                                     </span>
                                     <input
                                         className="w-full bg-[#0E1528] border border-[#5671FF]/20 focus:border-[#5671FF] focus:ring-1 focus:ring-[#5671FF] rounded-lg py-3.5 pl-12 pr-4 text-slate-100 placeholder:text-slate-500 transition-all outline-none hover:border-[#5671FF]/40"
-                                        placeholder="student.name@wit.edu.ph"
+                                        placeholder="student@wit.edu.ph"
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
@@ -83,12 +82,6 @@ const LoginForm = () => {
                                     <label className="text-sm font-semibold text-slate-300">
                                         Password
                                     </label>
-                                    <a
-                                        className="text-xs font-bold text-[#5671FF] hover:text-[#5671FF]/80 transition-colors"
-                                        href="#"
-                                    >
-                                        Forgot Password?
-                                    </a>
                                 </div>
                                 <div className="relative">
                                     <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#5671FF]/50 text-lg">
@@ -113,20 +106,6 @@ const LoginForm = () => {
                                     </button>
                                 </div>
                             </div>
-                            {/* Remember Me */}
-                            <div className="flex items-center gap-2 ml-1">
-                                <input
-                                    className="rounded border-[#5671FF]/30 bg-[#0E1528] text-[#5671FF] focus:ring-[#5671FF] focus:ring-offset-[#1a2238] form-checkbox transition-colors"
-                                    id="remember"
-                                    type="checkbox"
-                                />
-                                <label
-                                    className="text-xs text-slate-400 font-medium cursor-pointer hover:text-slate-300 transition-colors"
-                                    htmlFor="remember"
-                                >
-                                    Keep me logged in for 30 days
-                                </label>
-                            </div>
                             {/* Login Button */}
                             <button 
                                 type="submit" 
@@ -134,23 +113,23 @@ const LoginForm = () => {
                                 className="w-full bg-[#FF602D] hover:bg-[#FF602D]/90 disabled:bg-[#FF602D]/50 text-white font-bold py-4 rounded-lg shadow-[0_0_15px_rgba(255,96,45,0.3)] hover:shadow-[0_0_25px_rgba(255,96,45,0.5)] transition-all transform active:scale-[0.98] flex items-center justify-center gap-2"
                             >
                                 <span className="material-symbols-outlined text-lg">login</span>
-                                {loading ? "SIGNING IN..." : "SIGN IN TO PORTAL"}
+                                {loading ? "LOGGING IN..." : "LOGIN"}
                             </button>
                         </form>
                         <div className="mt-8 pt-6 border-t border-[#5671FF]/10 flex flex-col items-center gap-4">
                             <p className="text-xs text-slate-500">
-                                Not a member of PSITS WIT yet?
+                                Don't have an account?
                             </p>
-                            <button className="text-sm font-bold text-[#5671FF] hover:text-[#5671FF]/80 transition-colors uppercase tracking-widest">
-                                Apply for Membership
-                            </button>
+                            <Link 
+                                to="/signup"
+                                className="text-sm font-bold text-[#5671FF] hover:text-[#5671FF]/80 transition-colors uppercase tracking-widest"
+                            >
+                                Sign up here!
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
-            <p className="text-center text-[10px] text-slate-500 uppercase tracking-widest">
-                Protected by WIT Secure-Gate Systems
-            </p>
         </div>
     );
 };
