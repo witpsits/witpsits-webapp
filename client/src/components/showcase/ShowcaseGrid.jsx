@@ -192,13 +192,6 @@ const ShowcaseGrid = ({ activeCategory, achievements, loading }) => {
                                         <span className="text-[8px] font-medium uppercase tracking-widest text-slate-500">Official Department Record</span>
                                     </div>
                                 </div>
-                                
-                                <button 
-                                  onClick={() => setSelectedAchievement(null)}
-                                  className="w-full sm:w-auto px-10 py-3.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all border border-white/10 active:scale-95"
-                                >
-                                    Return to Gallery
-                                </button>
                             </div>
                         </div>
                     </div>
