@@ -15,7 +15,7 @@ const ScrollReveal = ({ children, width = "100%", delay = 0, direction = "up" })
   };
 
   return (
-    <div style={{ position: "relative", width, overflow: "hidden" }}>
+    <div style={{ position: "relative", width, overflow: "visible" }}>
       <motion.div
         variants={variants}
         initial="hidden"

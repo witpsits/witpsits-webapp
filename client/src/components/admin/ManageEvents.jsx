@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Bell, Settings, Plus, Search, Calendar, Edit, Trash2, X, UploadCloud, Image as ImageIcon, Menu } from "lucide-react";
+import { Plus, Search, Calendar, Edit, Trash2, X, UploadCloud, Image as ImageIcon, Menu } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
 import { supabase } from "../../lib/supabaseClient";
 import imageCompression from 'browser-image-compression';
@@ -155,8 +155,6 @@ const ManageEvents = () => {
             </div>
           </div>
           <div className="flex items-center gap-2 lg:gap-4">
-            <button className="p-2 bg-white/5 rounded-lg text-slate-500 hover:text-[#5671FF] transition-colors"><Bell className="w-5 h-5" /></button>
-            <button className="hidden sm:block p-2 bg-white/5 rounded-lg text-slate-500 hover:text-[#5671FF] transition-colors"><Settings className="w-5 h-5" /></button>
             <button 
               onClick={() => setIsModalOpen(true)}
               className="bg-[#FF602D] hover:bg-[#FF602D]/90 text-white px-4 lg:px-6 py-2.5 rounded-lg text-xs lg:text-sm font-bold shadow-lg shadow-[#FF602D]/30 flex items-center gap-2 transition-all active:scale-95"

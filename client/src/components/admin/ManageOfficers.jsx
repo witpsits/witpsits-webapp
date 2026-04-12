@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bell, Settings, Plus, Search, Users, Edit, Trash2, X, UploadCloud, ChevronDown, Menu, Calendar, Star } from "lucide-react";
+import { Plus, Search, Users, Edit, Trash2, X, UploadCloud, ChevronDown, Menu, Calendar, Star } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
 import { supabase } from "../../lib/supabaseClient";
 import imageCompression from 'browser-image-compression';

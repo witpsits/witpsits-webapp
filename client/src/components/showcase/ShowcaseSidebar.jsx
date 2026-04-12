@@ -19,10 +19,10 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
             <div className="flex flex-col gap-6 sticky top-24">
                 <div className="flex flex-col gap-2">
                     <h3 className="text-slate-500 text-xs font-bold uppercase tracking-widest">Filter By Category</h3>
-                    <div className="flex flex-col gap-1 mt-2">
+                    <div className="flex flex-col gap-1 mt-2 pr-2">
                         <button 
                             onClick={() => setActiveCategory('All Highlights')}
-                            className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all font-medium ${
+                            className={`flex items-center justify-between gap-3 px-4 py-3 rounded-2xl transition-all font-medium ${
                                 activeCategory === 'All Highlights' 
                                 ? 'bg-[#5671FF] text-white shadow-lg shadow-[#5671FF]/20' 
                                 : 'text-slate-300 hover:bg-[#5671FF]/10'
@@ -43,7 +43,7 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
                             <button 
                                 key={cat.name}
                                 onClick={() => setActiveCategory(cat.name)}
-                                className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all font-medium ${
+                                className={`flex items-center justify-between gap-3 px-4 py-3 rounded-2xl transition-all font-medium ${
                                     activeCategory === cat.name 
                                     ? 'bg-[#5671FF] text-white shadow-lg shadow-[#5671FF]/20' 
                                     : 'text-slate-300 hover:bg-[#5671FF]/10'

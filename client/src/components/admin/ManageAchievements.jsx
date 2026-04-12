@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bell, Settings, Plus, Search, Trophy, Edit, Trash2, X, UploadCloud, Menu } from "lucide-react";
+import { Plus, Search, Trophy, Edit, Trash2, X, UploadCloud, Menu } from "lucide-react";
 import AdminSidebar from "./AdminSidebar";
 import { supabase } from "../../lib/supabaseClient";
 import imageCompression from 'browser-image-compression';
@@ -174,8 +174,6 @@ const ManageAchievements = () => {
             </div>
           </div>
           <div className="flex items-center gap-2 lg:gap-4">
-            <button className="p-2 bg-white/5 rounded-lg text-slate-500 hover:text-[#5671FF] transition-colors"><Bell className="w-5 h-5" /></button>
-            <button className="hidden sm:block p-2 bg-white/5 rounded-lg text-slate-500 hover:text-[#5671FF] transition-colors"><Settings className="w-5 h-5" /></button>
             <button 
               onClick={() => {
                 setEditingAchievementId(null);

@@ -15,7 +15,6 @@ import {
   Rocket,
   Info,
   Loader2,
-  CheckCircle2,
   Edit,
   Calendar
 } from "lucide-react";

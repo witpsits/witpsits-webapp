@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Bell, FileText, History, ChevronLeft, Users, Calendar, Award, BookOpen, X } from "lucide-react";
+import { Bell, FileText, ChevronLeft, Users, Calendar, Award, BookOpen, X } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 
 const AdminSidebar = ({ isOpen, onClose }) => {
@@ -21,7 +21,6 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     { name: "Manage Events", path: "/admin/events", icon: Calendar },
     { name: "Manage Achievements", path: "/admin/achievements", icon: Award },
     { name: "Manage Prospectus", path: "/admin/prospectus", icon: BookOpen },
-    { name: "User Logs", path: "/admin/logs", icon: History },
   ];
 
   return (
@@ -45,7 +44,6 @@ const AdminSidebar = ({ isOpen, onClose }) => {
               </div>
               <div className="flex flex-col">
                 <h1 className="text-white text-base font-bold leading-tight">PSITS-WIT</h1>
-                <p className="text-[#5671FF]/60 text-xs font-medium">Super Admin</p>
               </div>
             </div>
             <button onClick={onClose} className="lg:hidden p-2 text-slate-400 hover:text-white">
@@ -79,12 +77,11 @@ const AdminSidebar = ({ isOpen, onClose }) => {
             <div className="h-10 w-10 rounded-full bg-[#5671FF]/20 flex items-center justify-center text-[#5671FF] font-bold">AD</div>
             <div className="flex flex-col overflow-hidden">
               <p className="text-xs font-bold truncate">Admin</p>
-              <p className="text-[10px] text-slate-500">Authorized</p>
             </div>
           </div>
           <button 
             onClick={handleLogout}
-            className="w-full bg-slate-800 text-slate-200 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-red-500 hover:text-white transition-colors"
+            className="w-full bg-red-600 text-slate-200 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-red-700 hover:text-white transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             Logout

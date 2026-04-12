@@ -10,11 +10,6 @@ const ShowcaseGrid = ({ activeCategory, achievements, loading }) => {
     return (
         <div className="flex-1">
             <div className="flex flex-col gap-2 mb-8">
-                <nav className="flex items-center gap-2 text-sm text-slate-400 mb-2">
-                    <a className="hover:text-[#5671FF] transition-colors" href="/">Home</a>
-                    <span className="material-symbols-outlined text-sm">chevron_right</span>
-                    <span className="text-[#5671FF] font-medium">Showcase</span>
-                </nav>
                 <h1 className="text-4xl lg:text-5xl font-black text-slate-100 tracking-tight">
                     Showcase &amp; <span className="text-[#5671FF] underline decoration-[#5671FF]/30 decoration-4 underline-offset-8">Achievements</span>
                 </h1>
