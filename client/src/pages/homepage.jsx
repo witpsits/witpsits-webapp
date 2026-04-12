@@ -266,13 +266,6 @@ const Homepage = () => {
                       you excel in your IT curriculum.
                     </p>
                   </div>
-                  <a
-                    href="#"
-                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-                  >
-                    Access Vault
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
                 </div>
               </SpotlightCard>
             </ScrollReveal>
@@ -293,13 +286,6 @@ const Homepage = () => {
                       shaping the chapter's future.
                     </p>
                   </div>
-                  <a
-                    href="#"
-                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-                  >
-                    View Chart
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
                 </div>
               </SpotlightCard>
             </ScrollReveal>
@@ -320,13 +306,6 @@ const Homepage = () => {
                       open-source contributions.
                     </p>
                   </div>
-                  <a
-                    href="#"
-                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-                  >
-                    View Showcase
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
                 </div>
               </SpotlightCard>
             </ScrollReveal>
