@@ -127,19 +127,19 @@ const Homepage = () => {
             <div className="relative hidden md:flex justify-center">
               <div className="relative h-[300px] w-[300px] overflow-hidden rounded-2xl border border-[#5671FF]/30 shadow-[0_0_15px_rgba(86,113,255,0.1)] hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.25)] transition-all">
                 <img
-                  src={latestEvents[0]?.image_url || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=400&fit=crop"}
-                  alt={latestEvents[0]?.title || "Digital Frontiers"}
-                  className="h-full w-full object-cover transition-all"
+                  src={latestEvents[0]?.image_url || "/assets/PSITS_logo.png"}
+                  alt={latestEvents[0]?.title || "PSITS WIT Chapter"}
+                  className={`h-full w-full ${latestEvents[0]?.image_url ? 'object-cover' : 'object-contain p-8'} transition-all`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E1528]/80 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 flex flex-col">
-                  <span className="text-xs font-bold text-[#5671FF]">
-                    {latestEvents[0] ? "Latest Update" : "NITCON 2024"}
-                  </span>
-                  <span className="text-lg font-bold text-white line-clamp-1">
-                    {latestEvents[0]?.title || "Digital Frontiers"}
-                  </span>
-                </div>
+                {latestEvents[0] && (
+                  <div className="absolute bottom-4 left-4 flex flex-col">
+                    <span className="text-xs font-bold text-[#5671FF]">Latest Update</span>
+                    <span className="text-lg font-bold text-white line-clamp-1 text-shadow-sm">
+                      {latestEvents[0].title}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Decorative Elements */}
@@ -169,10 +169,19 @@ const Homepage = () => {
                   <div className="w-8 h-8 rounded-full border-4 border-[#5671FF]/30 border-t-[#5671FF] animate-spin"></div>
                </div>
             ) : latestEvents.length === 0 ? (
-               <div className="col-span-full text-center py-10 bg-[#1a2238] rounded-xl border border-[#5671FF]/20">
-                  <span className="material-symbols-outlined text-4xl text-[#5671FF]/30 mb-2 block">campaign</span>
-                  <h3 className="text-lg font-bold text-slate-300">No recent announcements</h3>
-                  <p className="text-sm text-slate-500">Check back later for system updates.</p>
+               <div className="col-span-full text-center py-16 bg-[#1a2238] rounded-2xl border border-[#5671FF]/10 flex flex-col items-center gap-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#5671FF]/20 blur-3xl rounded-full"></div>
+                    <img 
+                      src="/assets/PSITS_logo.png" 
+                      alt="PSITS Logo" 
+                      className="relative w-32 h-32 md:w-40 md:h-40 object-contain opacity-50 grayscale hover:grayscale-0 transition-all duration-700"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold text-slate-300">No transmissions found at the moment</h3>
+                    <p className="text-sm text-slate-500 max-w-xs mx-auto">Our systems are currently awaiting new updates. Please check back shortly for the latest department bulletins.</p>
+                  </div>
                </div>
             ) : (
                 latestEvents.map((item, idx) => (
