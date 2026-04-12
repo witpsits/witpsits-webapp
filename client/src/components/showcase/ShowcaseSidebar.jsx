@@ -19,18 +19,18 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
             <div className="flex flex-col gap-6 sticky top-24">
                 <div className="flex flex-col gap-2">
                     <h3 className="text-slate-500 text-xs font-bold uppercase tracking-widest">Filter By Category</h3>
-                    <div className="flex flex-col gap-1 mt-2 pr-2">
+                    <div className="flex lg:flex-col gap-2 mt-2 overflow-x-auto lg:overflow-y-auto lg:max-h-[60vh] scrollbar-hide lg:scrollbar-thin scrollbar-thumb-[#5671FF]/20 hover:scrollbar-thumb-[#5671FF]/40 pb-4 lg:pb-0 pr-0 lg:pr-2">
                         <button 
                             onClick={() => setActiveCategory('All Highlights')}
-                            className={`flex items-center justify-between gap-3 px-4 py-3 rounded-2xl transition-all font-medium ${
+                            className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all font-medium shrink-0 ${
                                 activeCategory === 'All Highlights' 
                                 ? 'bg-[#5671FF] text-white shadow-lg shadow-[#5671FF]/20' 
                                 : 'text-slate-300 hover:bg-[#5671FF]/10'
                             }`}
                         >
                             <div className="flex items-center gap-3">
-                                <span className="material-symbols-outlined text-[22px]">dashboard</span>
-                                <span className="text-sm">All Highlights</span>
+                                <span className="material-symbols-outlined text-[20px] lg:text-[22px]">dashboard</span>
+                                <span className="text-sm whitespace-nowrap">All Highlights</span>
                             </div>
                             <span className={`text-xs px-2 py-0.5 rounded-full ${
                                 activeCategory === 'All Highlights' ? 'bg-white/20' : 'bg-[#5671FF]/10 text-[#5671FF]'
@@ -43,15 +43,15 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
                             <button 
                                 key={cat.name}
                                 onClick={() => setActiveCategory(cat.name)}
-                                className={`flex items-center justify-between gap-3 px-4 py-3 rounded-2xl transition-all font-medium ${
+                                className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all font-medium shrink-0 ${
                                     activeCategory === cat.name 
                                     ? 'bg-[#5671FF] text-white shadow-lg shadow-[#5671FF]/20' 
                                     : 'text-slate-300 hover:bg-[#5671FF]/10'
                                 }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-[22px]">{cat.icon}</span>
-                                    <span className="text-sm">{cat.name}</span>
+                                    <span className="material-symbols-outlined text-[20px] lg:text-[22px]">{cat.icon}</span>
+                                    <span className="text-sm whitespace-nowrap">{cat.name}</span>
                                 </div>
                                 <span className={`text-xs px-2 py-0.5 rounded-full ${
                                     activeCategory === cat.name ? 'bg-white/20' : 'bg-[#5671FF]/10 text-[#5671FF]'
@@ -62,7 +62,6 @@ const ShowcaseSidebar = ({ activeCategory, setActiveCategory, achievements }) =>
                         ))}
                     </div>
                 </div>
-
             </div>
         </aside>
     );
