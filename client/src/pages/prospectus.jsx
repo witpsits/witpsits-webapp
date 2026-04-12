@@ -8,6 +8,7 @@ import ProspectusTable from "../components/prospectus/ProspectusTable";
 import ProspectusAdvising from "../components/prospectus/ProspectusAdvising";
 import Footer from "../components/footer";
 import PrivacyModal from "../components/PrivacyModal";
+import ScrollReveal from "../components/ScrollReveal";
 
 const ProspectusPage = () => {
   const [documents, setDocuments] = useState([]);
@@ -65,19 +66,33 @@ const ProspectusPage = () => {
 
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-36 pb-8">
         <div className="layout-content-container flex flex-col gap-4">
-          <ProspectusHero />
-          <ProspectusTabs />
-          <ProspectusStats 
-            downloads={downloads} 
-            totalDocs={stats.totalDocs}
-            latestYear={stats.latestYear}
-          />
-          <ProspectusTable 
-            documents={documents} 
-            loading={loading}
-            onDownload={handleDownload} 
-          />
-          <ProspectusAdvising />
+          <ScrollReveal>
+            <ProspectusHero />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.1}>
+            <ProspectusTabs />
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.2}>
+            <ProspectusStats 
+              downloads={downloads} 
+              totalDocs={stats.totalDocs}
+              latestYear={stats.latestYear}
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.3}>
+            <ProspectusTable 
+              documents={documents} 
+              loading={loading}
+              onDownload={handleDownload} 
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.4}>
+            <ProspectusAdvising />
+          </ScrollReveal>
         </div>
       </main>
 

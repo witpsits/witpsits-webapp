@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
+import ScrollReveal from "../components/ScrollReveal.jsx";
+import SpotlightCard from "../components/SpotlightCardAnimation/spotlightCard.jsx";
 import { supabase } from "../lib/supabaseClient";
 
 const Homepage = () => {
@@ -55,7 +57,8 @@ const Homepage = () => {
       {/* Main Content */}
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-10 lg:pb-12">
         {/* Hero Section */}
-        <section className="relative mb-16 overflow-hidden rounded-xl border border-[#5671FF]/20 bg-[#1a2238]">
+        <ScrollReveal>
+          <section className="relative mb-16 overflow-hidden rounded-xl border border-[#5671FF]/20 bg-[#1a2238]">
           {/* Pattern Background */}
           <div
             className="absolute inset-0 opacity-20"
@@ -145,10 +148,12 @@ const Homepage = () => {
             </div>
           </div>
         </section>
+        </ScrollReveal>
 
         {/* System Updates Section */}
         <section id="updates-section" className="mb-16">
-          <div className="mb-8 flex items-end justify-between">
+          <ScrollReveal>
+            <div className="mb-8 flex items-end justify-between">
             <div className="flex flex-col gap-1">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-100">
                 System <span className="text-[#5671FF]">Updates</span>
@@ -178,12 +183,12 @@ const Homepage = () => {
                </div>
             ) : (
                 latestEvents.map((item, idx) => (
-                  <div 
-                    key={item.id || idx} 
-                    onClick={() => setSelectedEvent(item)}
-                    className="group flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all cursor-pointer"
-                  >
-                    <div className="relative h-48 overflow-hidden bg-[#0E1528] flex items-center justify-center">
+                  <ScrollReveal key={item.id || idx} delay={idx * 0.1}>
+                    <div 
+                      onClick={() => setSelectedEvent(item)}
+                      className="group h-full flex flex-col overflow-hidden rounded-xl bg-[#1a2238] border border-[#5671FF]/20 hover:border-[#5671FF] hover:shadow-[0_0_20px_rgba(86,113,255,0.15)] transition-all cursor-pointer"
+                    >
+                      <div className="relative h-48 overflow-hidden bg-[#0E1528] flex items-center justify-center">
                       {item.image_url ? (
                         <img
                           src={item.image_url}
@@ -222,98 +227,115 @@ const Homepage = () => {
                         <BookOpen className="w-5 h-5 text-[#5671FF]/50" />
                       </div>
                     </div>
-                  </div>
+                   </div>
+                  </ScrollReveal>
                 ))
             )}
           </div>
-        </section>
+        </ScrollReveal>
+      </section>
 
         {/* Core Pillars Section */}
         <section className="mb-16">
-          <div className="mb-12 flex flex-col gap-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-slate-100">
-              Core <span className="text-[#5671FF]">Pillars</span>
-            </h2>
-            <p className="mx-auto max-w-2xl text-slate-400">
-              Our mission is to foster a community of tech excellence through
-              three strategic focus areas designed for student growth.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="mb-12 flex flex-col gap-4 text-center">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-100">
+                Core <span className="text-[#5671FF]">Pillars</span>
+              </h2>
+              <p className="mx-auto max-w-2xl text-slate-400">
+                Our mission is to foster a community of tech excellence through
+                three strategic focus areas designed for student growth.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Pillar 1 */}
-            <div className="flex flex-col gap-6 rounded-2xl border border-[#5671FF]/20 bg-[#1a2238] p-8 transition-all hover:bg-[#5671FF]/5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
-                <BookOpen className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">
-                  Academic Excellence
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-400">
-                  Curated modules, study groups, and resource sharing to help
-                  you excel in your IT curriculum.
-                </p>
-              </div>
-              <a
-                href="#"
-                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-              >
-                Access Vault
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+            <ScrollReveal direction="left" delay={0.1}>
+              <SpotlightCard className="h-full border-[#5671FF]/20 bg-[#5671FF]/5 transition-all">
+                <div className="flex flex-col h-full gap-6">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
+                    <BookOpen className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="mb-2 text-xl font-bold text-slate-100">
+                      Academic Excellence
+                    </h3>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      Curated modules, study groups, and resource sharing to help
+                      you excel in your IT curriculum.
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+                  >
+                    Access Vault
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            </ScrollReveal>
 
             {/* Pillar 2 */}
-            <div className="flex flex-col gap-6 rounded-2xl border border-[#5671FF]/20 bg-[#1a2238] p-8 transition-all hover:bg-[#5671FF]/5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
-                <Network className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">
-                  Leadership Network
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-400">
-                  Connect with the student council and alumni mentors who are
-                  shaping the chapter's future.
-                </p>
-              </div>
-              <a
-                href="#"
-                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-              >
-                View Chart
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+            <ScrollReveal direction="up" delay={0.2}>
+              <SpotlightCard className="h-full border-[#5671FF]/20 bg-[#5671FF]/5 transition-all">
+                <div className="flex flex-col h-full gap-6">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
+                    <Network className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="mb-2 text-xl font-bold text-slate-100">
+                      Leadership Network
+                    </h3>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      Connect with the student council and alumni mentors who are
+                      shaping the chapter's future.
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+                  >
+                    View Chart
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            </ScrollReveal>
 
             {/* Pillar 3 */}
-            <div className="flex flex-col gap-6 rounded-2xl border border-[#5671FF]/20 bg-[#1a2238] p-8 transition-all hover:bg-[#5671FF]/5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
-                <Rocket className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-bold text-slate-100">
-                  Innovation Lab
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-400">
-                  Showcasing top-tier student projects, capstones, and
-                  open-source contributions.
-                </p>
-              </div>
-              <a
-                href="#"
-                className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
-              >
-                View Showcase
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+            <ScrollReveal direction="right" delay={0.3}>
+              <SpotlightCard className="h-full border-[#5671FF]/20 bg-[#5671FF]/5 transition-all">
+                <div className="flex flex-col h-full gap-6">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#5671FF]/10 text-[#5671FF]">
+                    <Rocket className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="mb-2 text-xl font-bold text-slate-100">
+                      Innovation Lab
+                    </h3>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      Showcasing top-tier student projects, capstones, and
+                      open-source contributions.
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#5671FF]"
+                  >
+                    View Showcase
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            </ScrollReveal>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="rounded-3xl border border-[#5671FF]/20 bg-[#1a2238] p-8 md:p-12">
+        <ScrollReveal>
+          <section className="rounded-3xl border border-[#5671FF]/20 bg-[#5671FF]/5 p-8 md:p-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl text-center md:text-left">
               <h2 className="mb-2 text-3xl md:text-4xl font-black text-white">
@@ -331,9 +353,10 @@ const Homepage = () => {
               >
                 Follow Our Facebook Page
               </a>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </ScrollReveal>
       </main>
 
       {/* Footer */}
