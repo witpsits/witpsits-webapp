@@ -92,14 +92,12 @@ const ManageAchievements = () => {
       };
 
       if (editingAchievementId) {
-        const { error } = await supabase.from('achievements').update(achievementData).eq('id', editingAchievementId);
-        if (error) throw error;
+        const { error: updateError } = await supabase.from('achievements').update(achievementData).eq('id', editingAchievementId);
+        if (updateError) throw updateError;
       } else {
-        const { error } = await supabase.from('achievements').insert([achievementData]);
-        if (error) throw error;
+        const { error: insertError } = await supabase.from('achievements').insert([achievementData]);
+        if (insertError) throw insertError;
       }
-      
-      if (error) throw error;
       
       setIsModalOpen(false);
       setEditingAchievementId(null);
